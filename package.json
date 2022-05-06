@@ -1,0 +1,25 @@
+{
+  "name": "csci2720-weather",
+  "version": "1.0.0",
+  "description": "CSCI2720 Course Project-Group 33",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MY-Chris/CSCI2720-Weather.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MY-Chris/CSCI2720-Weather/issues"
+  },
+  "homepage": "https://github.com/MY-Chris/CSCI2720-Weather#readme",
+  "dependencies": {
+    "admin-bro": "^4.0.1",
+    "admin-bro-expressjs": "^2.1.1",
+    "admin-bro-mongoose": "^0.5.2",
+    "express": "^4.18.1"
+  }
+}
