@@ -8,8 +8,10 @@ import {
 } from "react-router-dom";
 
 import Home from './Home';
-import Contact from './Contact';
 import About from './About'
+import Table from './Table';
+import MapGoogle from './MapGoogle';
+import TableSearch from './TableSearch';
 
 export default class NavbarComp extends Component {
     render() {
@@ -27,7 +29,9 @@ export default class NavbarComp extends Component {
                             >
                                 <Nav.Link as={Link} to="/">Home</Nav.Link>
                                 <Nav.Link as={Link} to="/about">About</Nav.Link>
-                                <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
+                                <Nav.Link as={Link} to="/table">Table</Nav.Link>
+                                <Nav.Link as={Link} to="/tablesearch">Search</Nav.Link>
+                                <Nav.Link as={Link} to="/mapgoogle">Map</Nav.Link>
 
                             </Nav>
 
@@ -38,7 +42,11 @@ export default class NavbarComp extends Component {
                     <Routes>
                         <Route exact path="/about" element={<About/>}/>
 
-                        <Route exact path="/contact" element={<Contact/>}/>
+                        <Route exact path="/table" element={<Table/>}/>
+
+                        <Route exact path="/tablesearch" element={<TableSearch/>}/>
+
+                        <Route exact path="/mapgoogle" element={<MapGoogle/>}/>
 
                         <Route exact path="/" element={<Home/>}/>
 
