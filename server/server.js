@@ -25,10 +25,9 @@ const UserSchema = mongoose.Schema({
 });
 
 const LocationSchema = mongoose.Schema({
-    locName: {type: String, required: true},
+    locName: {type: String, required: true, unique: true},
     latitude: {type: String, required: true},
     longitude: {type: String, required: true},
-    weatherInfo: [{time: String, temp_c: Number, wind_kph: Number, wind_dir: String, humidity: Number, precip_mm: Number, vis_km: Number}],
     comments: [{commentId: {type: Schema.Types.ObjectId, ref: 'Comment'}}]
 });
 
@@ -57,21 +56,46 @@ function loadCurrentWeather(loc) {
     key = "072f5ae9c4c849f8858104048220805";
     url = "http://api.weatherapi.com/v1/current.json?key=" + key + "&q=" + loc;
     axios.get(url)
-    .then(res => Location.findOne({locName: loc}, function (err, location) {
-        if (err)
-            console.log("Failed to find the location in database")
-        if (location != null) {
-            weather = location.weatherInfo.time("current");
-            weather["temp_c"] = res.data.current.temp_c;
-            weather["wind_kph"] = res.data.current.wind_kph;
-            weather["wind_dir"] = res.data.current.wind_dir;
-            weather["humidity"] = res.data.current.humidity;
-            weather["precip_mm"] = res.data.current.precip_mm;
-            weather["vis_km"] = res.data.current.vis_km;
-            location.save();
-        }
-    }))
-    .catch(err => console.log("Failed to load from WeatherAPI"));
+    .then(res => {
+        let temp_c = res.data.current.temp_c;
+        let wind_kph = res.data.current.wind_kph;
+        let wind_dir = res.data.current.wind_dir;
+        let humidity = res.data.current.humidity;
+        let precip_mm = res.data.current.precip_mm;
+        let vis_km = res.data.current.vis_km;
+        //res.send(...)
+    })
+    .catch(err => console.log("Failed to load current weather from WeatherAPI"));
 }
+
+function addLocation (locName, userId) {
+    const loc = {locName: locName};
+    User.findOneAndUpdate(
+        {_id: userId},
+        {$push: {favoriteLocs: loc}},
+        function (err, res) {
+            if (err)
+                console.log(err);
+            else
+                console.log(res);
+        }
+    );
+}
+
+function listAllLocations (userId) {
+    let loclist = [];
+    User.findById(userId, function (err, user) {
+        let list = [];
+        if (err)
+            console.log(err);
+        user.favoriteLocs.forEach(element => {
+            list.push(element.locName);
+        });
+        return list; //change to res.send(...)
+    });
+}
+
+//addLocation("Hong Kong", mongoose.Types.ObjectId('627a7853eb2897a49692e867'));
+//console.log(listAllLocations (mongoose.Types.ObjectId('627a7853eb2897a49692e867')));
 
 const server = app.listen(3000);
