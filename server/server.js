@@ -18,22 +18,22 @@ const {Schema} = mongoose;
 const UserSchema = mongoose.Schema({
     username: {type: String, required: true},
     password: {type: String, required: true},
-    searchHistory: [{locName: String}],
-    favoriteLocs: [{locName: String}],
-    comments: [{commentId: {type: Schema.Types.ObjectId, ref: 'Comment'}}],
+    searchHistory: [{type: String}],
+    favoriteLocs: [{type: String}],
+    comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}],
     preference: String
 });
 
 const LocationSchema = mongoose.Schema({
     locName: {type: String, required: true, unique: true},
-    latitude: {type: String, required: true},
-    longitude: {type: String, required: true},
-    comments: [{commentId: {type: Schema.Types.ObjectId, ref: 'Comment'}}]
+    latitude: {type: Number, required: true},
+    longitude: {type: Number, required: true},
+    comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}]
 });
 
 const CommentSchema = mongoose.Schema({
-    commentUser: {type: String, required: true}, //just store the username of User
-    commentLoc: {type: String, required: true}, //just store the locName of Location
+    commentUser: {type: Schema.Types.ObjectId, ref: 'User', required: true},
+    commentLoc: {type: Schema.Types.ObjectId, ref: 'Location', required: true},
     content: {type: String, required: true}
 });
 
@@ -53,6 +53,7 @@ const Request = mongoose.model('Request', RequestSchema);
 
 
 function loadCurrentWeather(loc) {
+    console.log(loc);
     key = "072f5ae9c4c849f8858104048220805";
     url = "http://api.weatherapi.com/v1/current.json?key=" + key + "&q=" + loc;
     axios.get(url)
@@ -63,16 +64,16 @@ function loadCurrentWeather(loc) {
         let humidity = res.data.current.humidity;
         let precip_mm = res.data.current.precip_mm;
         let vis_km = res.data.current.vis_km;
+        console.log(res);
         //res.send(...)
     })
     .catch(err => console.log("Failed to load current weather from WeatherAPI"));
 }
 
-function addLocation (locName, userId) {
-    const loc = {locName: locName};
+function addFavoriteLocation (locName, userId) {
     User.findOneAndUpdate(
         {_id: userId},
-        {$push: {favoriteLocs: loc}},
+        {$push: {favoriteLocs: locName}},
         function (err, res) {
             if (err)
                 console.log(err);
@@ -89,13 +90,69 @@ function listAllLocations (userId) {
         if (err)
             console.log(err);
         user.favoriteLocs.forEach(element => {
-            list.push(element.locName);
+            list.push(element);
         });
+        console.log(list);
         return list; //change to res.send(...)
     });
 }
 
-//addLocation("Hong Kong", mongoose.Types.ObjectId('627a7853eb2897a49692e867'));
-//console.log(listAllLocations (mongoose.Types.ObjectId('627a7853eb2897a49692e867')));
+function showLocationDetail (locName) {
+    Location.findOne({locName: locName})
+    .populate('comments')
+    .exec(function (err, loc) {
+        if (err)
+            console.log(err);
+        if (loc != null) {
+            console.log(loc.locName);
+            console.log(loc.latitude);
+            console.log(loc.longitude);
+            loc.comments.forEach(element => {
+                console.log(element.content);
+            })
+            //loadCurrentWeather(loc.locName);
+            //change to res.send(...)
+        }
+    });
+}
+
+function addComment(content, locName, userId) {
+    Location.findOne({locName: locName}, function (err, loc) {
+        if (err)
+            console.log(err);
+        if (loc != null) {
+            Comment.create({
+                commentUser: mongoose.Types.ObjectId(userId),
+                commentLoc: loc._id,
+                content: content
+            }, function (err, comment) {
+                if (err)
+                    console.log(err);
+                if (comment != null) {
+                    User.findOneAndUpdate(
+                        {_id: userId},
+                        {$push: {comments: comment._id}},
+                        function (err, res) {
+                            if (err)
+                                console.log(err);
+                            else
+                                console.log(res);
+                        }
+                    );
+                    Location.findOneAndUpdate(
+                        {locName: locName},
+                        {$push: {comments: comment._id}},
+                        function (err, res) {
+                            if (err)
+                                console.log(err);
+                            else
+                                console.log(res);
+                        }
+                    );
+                }
+            });
+        }
+    })
+}
 
 const server = app.listen(3000);
