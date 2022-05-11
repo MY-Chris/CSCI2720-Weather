@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import mockdata from "../data.json";
-import TableBody from "./TableBody";
-import TableHead from "./TableHead";
 
 export default class SearchResult extends Component {
   constructor(props) {
