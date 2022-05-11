@@ -19,4 +19,20 @@ db.once('open', function () {
 
 //Add Routes here
 
+//User feature 4
+app.get('/locations/:locName', (req, res) => {
+    myfunctions.showLocationDetail(req.params.locName, res);
+});
+app.put('/locations/:locName/users/:userId', (req, res) => {
+    myfunctions.addComment(req.body['content'], req.params.locName, req.params.userId);
+});
+
+//User feature 5
+app.put('/users/:userId/favorites', (req, res) => {
+    myfunctions.addFavoriteLocation(req.body['locName'], req.params.userId);
+});
+app.get('/users/:userId/favorites', (req, res) => {
+    myfunctions.listAllLocations(req.params.userId, res);
+});
+
 const server = app.listen(3000);

@@ -26,6 +26,7 @@ function loadCurrentWeather(loc) {
     .catch(err => console.log("Failed to load current weather from WeatherAPI"));
 }
 
+//User feature 5, add location into a list of user's favorite locations
 function addFavoriteLocation (locName, userId) {
     schemas.User.findOneAndUpdate(
         {_id: userId},
@@ -39,7 +40,8 @@ function addFavoriteLocation (locName, userId) {
     );
 }
 
-function listAllLocations (userId) {
+//User feature 5, list all favorite locations of a user
+function listAllLocations (userId, res) {
     let loclist = [];
     schemas.User.findById(userId, function (err, user) {
         let list = [];
@@ -53,7 +55,8 @@ function listAllLocations (userId) {
     });
 }
 
-function showLocationDetail (locName) {
+//User feature 4, show location details
+function showLocationDetail (locName, res) {
     schemas.Location.findOne({locName: locName})
     .populate('comments')
     .exec(function (err, loc) {
@@ -66,12 +69,13 @@ function showLocationDetail (locName) {
             loc.comments.forEach(element => {
                 console.log(element.content);
             })
-            //loadCurrentWeather(loc.locName);
+            loadCurrentWeather(loc.locName);
             //change to res.send(...)
         }
     });
 }
 
+//User feature 4, add a new comment
 function addComment(content, locName, userId) {
     schemas.Location.findOne({locName: locName}, function (err, loc) {
         if (err)
