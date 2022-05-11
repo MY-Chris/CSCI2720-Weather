@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b50e50cc-aacb-41f5-ba35-026f49e1d715" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.adminbro/.entry.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/CSCI2720-Weather.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/weather/src/Components/Logout.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/weather/src/Components/PrivateRoute.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/weather/src/Components/Signup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weather/src/Components/About.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/Components/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weather/src/Components/MyNavbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/Components/MyNavbar.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,6 +57,7 @@
       <workItem from="1651854110468" duration="143000" />
       <workItem from="1651854906335" duration="210000" />
       <workItem from="1651910195425" duration="6336000" />
+      <workItem from="1652266169686" duration="2418000" />
     </task>
     <servers />
   </component>
