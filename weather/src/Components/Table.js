@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import mockdata from "../data.json";
-import TableBody from "./TableBody";
-import TableHead from "./TableHead";
 
 export default class Table extends Component {
   constructor(props) {
@@ -60,6 +58,10 @@ export default class Table extends Component {
     }
   };
 
+  redirect(e){
+    window.location.pathname = `http://localhost:3000/`
+  }
+
   render(){
   return (
     <div>
@@ -104,8 +106,18 @@ export default class Table extends Component {
           return (
             <tr key={data.id}>
               {this.state.columns.map(({ accessor }) => {
-                const tData = data[accessor] ? data[accessor] : "——";
-                return <td key={accessor}>{tData}</td>;
+                if(accessor == "full_name"){
+                  const tData = data[accessor] ? data[accessor] : "——";
+                  return (<td key={accessor}>
+                            <a href = {`http://localhost:3000/info/${data[accessor]}`}>
+                              {tData}
+                            </a>
+                          </td>)
+                }
+                else{
+                  const tData = data[accessor] ? data[accessor] : "——";
+                  return <td key={accessor}>{tData}</td>
+                }
               })}
             </tr>
           );

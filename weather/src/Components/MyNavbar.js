@@ -14,6 +14,8 @@ import Logout from './Logout'
 import Table from './Table';
 import MapGoogle from './MapGoogle';
 import TableSearch from './TableSearch';
+import DisplayWeather from './DisplayWeather';
+import Favourites from './Favourites';
 
 
 export default class NavbarComp extends Component {
@@ -22,7 +24,7 @@ export default class NavbarComp extends Component {
             <Router>
                 <div>
                     <Navbar bg="dark" variant={"dark"} expand="lg">
-                        <Navbar.Brand href="#">Weathering With Me</Navbar.Brand>
+                        <Navbar.Brand href="#">&emsp;Weathering With Me</Navbar.Brand>
                         <Navbar.Toggle aria-controls="navbarScroll" />
                         <Navbar.Collapse id="navbarScroll">
                             <Nav
@@ -36,6 +38,7 @@ export default class NavbarComp extends Component {
                                 <Nav.Link as={Link} to="/table">Table</Nav.Link>
                                 <Nav.Link as={Link} to="/tablesearch">Search</Nav.Link>
                                 <Nav.Link as={Link} to="/mapgoogle">Map</Nav.Link>
+                                <Nav.Link as={Link} to="/favourites">Favourites</Nav.Link>
 
                             </Nav>
 
@@ -53,6 +56,10 @@ export default class NavbarComp extends Component {
                         <Route exact path="/tablesearch" element={<TableSearch/>}/>
 
                         <Route exact path="/mapgoogle" element={<MapGoogle/>}/>
+
+                        <Route exact path="/info/:city" element={<DisplayWeather/>}/>
+
+                        <Route exact path="/favourites" element={<Favourites/>}/>
 
                         <Route exact path="/" element={<Home/>}/>
 
