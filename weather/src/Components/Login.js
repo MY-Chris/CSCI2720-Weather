@@ -81,9 +81,12 @@ export default class Login extends Component {
 
   render() {
     return (
+    <div className="col d-flex justify-content-center">
+      <br/>
+        <div className="card card-container" style={{width:"50vw"}}>
+            <article className="card-body">
 
-        <div className="card card-container">
-
+          <h3 className="card-title mb-4 mt-1">Log In</h3>
 
           <Form
             onSubmit={this.handleLogin}
@@ -114,6 +117,7 @@ export default class Login extends Component {
                 validations={[required]}
               />
             </div>
+            <br/>
 
             <div className="form-group">
               <button
@@ -141,7 +145,9 @@ export default class Login extends Component {
               }}
             />
           </Form>
+              </article>
         </div>
+    </div>
 
     );
   }

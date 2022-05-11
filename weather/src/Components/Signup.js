@@ -137,7 +137,13 @@ export default class Register extends Component {
       }
     };
     return (
-        <div className="card card-container">
+        <div className="col d-flex justify-content-center">
+          <br/>
+          <div className="card card-container" style={{width:"50vw"}}>
+            <article className="card-body">
+
+              <h3 className="card-title mb-4 mt-1">Sign Up</h3>
+
           <Form
             onSubmit={this.handleRegister}
             ref={c => {
@@ -193,7 +199,7 @@ export default class Register extends Component {
                       validations={[required, vpassword1]}
                   />
                 </div>
-
+                <br/>
                 <div >
                   <button className="btn btn-primary btn-block">Sign Up</button>
                 </div>
@@ -221,6 +227,9 @@ export default class Register extends Component {
               }}
             />
           </Form>
+            </article>
+          </div>
+
         </div>
     );
   }

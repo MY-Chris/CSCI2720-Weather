@@ -7,7 +7,7 @@ import {
     Link,
     Navigate,
 } from "react-router-dom";
-
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import Login from "./Login";
 import Signup from "./Signup";
