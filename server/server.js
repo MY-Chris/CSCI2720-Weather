@@ -1,55 +1,30 @@
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://hkn:csci2720@cluster0.quwtc.mongodb.net/test');
+
 const cors = require('cors');
 const res = require('express/lib/response');
-app.use(cors());
+var corsOptions = {
+    origin: "http://localhost:8081"
+};
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+const PORT = process.env.PORT || 3000;
+const server = app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}.`);
+});
+
 const axios = require('axios');
 
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'Connection error:'));
-db.once('open', function () {
+const db = require("./app/models/index");
+db.mongoose.connect('mongodb+srv://hkn:csci2720@cluster0.quwtc.mongodb.net/test');
+// const db = mongoose.connection;
+db.mongoose.connection.on('error', console.error.bind(console, 'Connection error:'));
+db.mongoose.connection.once('open', function () {
     console.log("Connection is open...");
 });
 
-const {Schema} = mongoose;
 
-const UserSchema = mongoose.Schema({
-    username: {type: String, required: true},
-    password: {type: String, required: true},
-    searchHistory: [{type: String}],
-    favoriteLocs: [{type: String}],
-    comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}],
-    preference: String
-});
-
-const LocationSchema = mongoose.Schema({
-    locName: {type: String, required: true, unique: true},
-    latitude: {type: Number, required: true},
-    longitude: {type: Number, required: true},
-    comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}]
-});
-
-const CommentSchema = mongoose.Schema({
-    commentUser: {type: Schema.Types.ObjectId, ref: 'User', required: true},
-    commentLoc: {type: Schema.Types.ObjectId, ref: 'Location', required: true},
-    content: {type: String, required: true}
-});
-
-const RequestSchema = mongoose.Schema({
-    userId: {type: Schema.Types.ObjectId, required: true},
-    userIP: String,
-    userBrowser: String,
-    dateTime: Date,
-    reqMethod: String,
-    reqUrl: String
-});
-
-const User = mongoose.model('User', UserSchema);
-const Location = mongoose.model('Location', LocationSchema);
-const Comment = mongoose.model('Comment', CommentSchema);
-const Request = mongoose.model('Request', RequestSchema);
 
 
 function loadCurrentWeather(loc) {
@@ -155,4 +130,3 @@ function addComment(content, locName, userId) {
     })
 }
 
-const server = app.listen(3000);
