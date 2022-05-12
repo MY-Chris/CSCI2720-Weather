@@ -22,6 +22,7 @@ button {
   display: flex;
   flex-flow: column nowrap;
   /*background-image: radial-gradient(rgb(221, 233, 241) 5%, white);*/
+  border-radius: 20px;
 }
 
 .displayweather .maincard {
@@ -29,7 +30,7 @@ button {
   height: 256px;
   margin-top: 20px;
   margin-bottom: 0px;
-  align-self: left;
+  align-self:left;
   padding: 50px;
   border-radius: 20px;
   position: relative;
@@ -128,6 +129,7 @@ td {
 
 .comments{
   margin-top: 40px;
+  margin-bottom: 160px;
   height: 256px;
   display: flex;
   flex-flow: column nowrap;
@@ -135,7 +137,7 @@ td {
 }
 
 .comments .comments-card{
-  width: 540px;
+  width: 440px;
   height: 256px;
   margin-top: 20px;
   margin-bottom: 0px;
@@ -151,3 +153,39 @@ td {
   background-image: radial-gradient(rgb(221, 233, 241) 45%, white);
 }
 
+.map{
+  margin-top: 40px;
+  margin-bottom: 300px;
+  height: 56px;
+  display: flex;
+  flex-flow: column;
+  border-radius: 20px;
+}
+
+.chart{
+  margin-top: 40px;
+  margin-bottom: 1000px;
+  height: 56px;
+  display: flex;
+  flex-flow: column;
+  border-radius: 20px;
+}
+
+.chartcard{
+  width: 440px;
+  height: 256px;
+  margin-top: 20px;
+  margin-bottom: 0px;
+  align-self: left;
+  padding: 50px;
+  border-radius: 20px;
+  position: relative;
+  background: rgb(220, 235, 252);
+  background-image: radial-gradient(rgb(221, 233, 241) 45%, white);
+}
+
+.divchart{
+  position: relative;
+  margin-left: 50px;
+  width: 80%;
+}

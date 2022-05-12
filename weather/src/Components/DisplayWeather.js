@@ -1,9 +1,76 @@
 import React, { Component } from "react";
 import "./displayweather.css";
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
-import { ToggleButton, Container, Row, Col } from 'react-bootstrap';
+import { ToggleButton, Container, Row, Col, Table } from 'react-bootstrap';
 import unfavourite from '../images/unfavourite.png'
 import favourite from '../images/favourite.png'
+import { GoogleMap, LoadScript } from '@react-google-maps/api';
+
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+export const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: 'top',
+    },
+    title: {
+      display: true,
+      text: 'Past 10 hours',
+    },
+  },
+};
+
+const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+
+export const chartdata = {
+  labels,
+  datasets: [
+    {
+      label: 'Dataset 1',
+      data: [100, 200, 300, 400, 500, 200, 300],
+      borderColor: 'rgb(255, 99, 132)',
+      backgroundColor: 'rgba(255, 99, 132, 0.5)',
+    },
+    {
+      label: 'Dataset 2',
+      data: [200, 500, 200, 100, 800, 600, 700],
+      /*{
+        '0': 700,
+        '1': 200,
+        '2': 400,
+        '3': 300,
+        '4': 400,
+        '5': 600,
+        '6': 100
+      },
+      */
+      borderColor: 'rgb(53, 162, 235)',
+      backgroundColor: 'rgba(53, 162, 235, 0.5)',
+    },
+  ],
+};
+
 
 export class DisplayWeather extends Component{
   //const { data } = props;
@@ -14,42 +81,28 @@ export class DisplayWeather extends Component{
     this.state = {data: {
       "location": {
           "name": "London",
-          "region": "City of London, Greater London",
           "country": "United Kingdom",
           "lat": 51.52,
           "lon": -0.11,
           "tz_id": "Europe/London",
-          "localtime_epoch": 1652262429,
           "localtime": "2022-05-11 10:47"
       },
       "current": {
-          "last_updated_epoch": 1652261400,
           "last_updated": "2022-05-11 10:30",
           "temp_c": 15.0,
-          "temp_f": 59.0,
-          "is_day": 1,
           "condition": {
               "text": "Partly cloudy",
               "icon": "//cdn.weatherapi.com/weather/64x64/day/116.png",
-              "code": 1003
           },
-          "wind_mph": 17.4,
           "wind_kph": 28.1,
           "wind_degree": 230,
           "wind_dir": "SW",
-          "pressure_mb": 1009.0,
-          "pressure_in": 29.8,
           "precip_mm": 0.0,
-          "precip_in": 0.0,
           "humidity": 63,
           "cloud": 75,
           "feelslike_c": 13.5,
-          "feelslike_f": 56.4,
           "vis_km": 10.0,
-          "vis_miles": 6.0,
-          "uv": 4.0,
-          "gust_mph": 15.9,
-          "gust_kph": 25.6
+          "uv": 4.0
       }
   },
   comments:[
@@ -96,11 +149,46 @@ export class DisplayWeather extends Component{
 
   handleFavourite(e){
     this.setState({favourite: !this.state.favourite});
-    console.log(this.state.favourite)
+    console.log(this.state.favourite);
+    let status = this.state.favourite ? 0 : 1;
+    let cityurl = window.location.pathname;
+    let cityinurl = cityurl.substring(cityurl.lastIndexOf('/') + 1);
+    //let data = "location=" + cityinurl;
+    console.log(cityinurl);
+    console.log(status);
+    fetch('http://localhost:3000/locations/' + cityinurl + "/users/" + "testuserid" + "/fav/" + status)
+        .then((res) => res.text())
+        .then((data) => {
+          data.replace(/\n/g, "");
+          console.log("fetch done!");
+        });
   }
 
   processform(e){
-    console.log(document.getElementById("new-comment").value);
+    let content = document.getElementById("new-comment").value;
+    console.log(content);
+    let cityurl = window.location.pathname;
+    let cityinurl = cityurl.substring(cityurl.lastIndexOf('/') + 1);
+    //let data = "location=" + cityinurl;
+    console.log(cityinurl);
+
+    let data = "content="+ content;
+        fetch('http://localhost:3001/locations/' + cityinurl + "/users/" + "627be65d731afd1b3293a027", {
+            headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            },
+            mode: 'cors',
+            method: 'PUT',
+            body: data
+        })
+        .then(res => res.text())
+        .then(data => {
+            data.replace(/\n/g, "");
+            console.log("put done!");
+            console.log(data);
+            // need reloading?
+            //window.location.reload(false);
+        });
   }
   
 
@@ -251,7 +339,7 @@ export class DisplayWeather extends Component{
     <Col>
     <div className="comments">
     <section id="commentsSec" className="grad1">
-            <h3 id="heading4" className="text-center">Comments</h3>
+            <h3 id="heading4" className="text-center" style={{marginTop: 5}}>Comments</h3>
             <i>Please scroll down to see all the comments.&emsp;&emsp;&emsp;</i>
             <div id="comments" className="ScrollStyle"> 
             {this.state.comments.map((data) => {
@@ -272,32 +360,64 @@ export class DisplayWeather extends Component{
                 Comment cannot be empty.
               </div>
             </div>
-            <button id="addcomment" type="button" className="btn btn-primary" onClick={this.processform}>Add comment</button>
+            <button id="addcomment" type="button" className="btn btn-primary" onClick={this.processform} style={{marginBottom: 10}}>Add comment</button>
             </form>
           </section>
             </div>
     </Col>
     </Row>
-    <br></br>
-    
-        <br></br>
-        
-        <div className="container">
+    <br></br><br></br>
+
+    <Row>
+        <Col>
+        <div className="map">
+        {/*<LoadScript
+      googleMapsApiKey="AIzaSyBT7KTEpCi_Suspyvi-2Nqp7BVR2E6zQWM"
+    >
+        <GoogleMap
+        mapContainerStyle={{width: '400px',
+        height: '400px'}}
+        center={{
+          lat: -3.745,
+          lng: -38.523
+        }}
+        zoom={10}
+      >
+        <></>
+      </GoogleMap>
+      </LoadScript>*/}
+      
             <Map
                   google={this.props.google}
                   zoom={8}
                   style={{
-                    width: '60%',
-                    height: '40%',
+                    width: '80%',
+                    height: '50%',
                   }}
                   initialCenter={{ lat: this.state.data.location.lat, lng: this.state.data.location.lon}}
                 >
                   {this.displayMarkers()}
                 </Map>
             </div>
-          
+            </Col>
+       </Row> 
+
+       <div className="divchart">
+    <Row>
+    <div className="chart">
+      <Col>
+    <Line options={options} data={chartdata} />
+    </Col>
+    <Col>
+    <Line options={options} data={chartdata} />
+    </Col>
     </div>
-    </Container>
+    </Row> 
+</div>
+      
+    </div>
+      </Container>
+    
   );
       }
 }

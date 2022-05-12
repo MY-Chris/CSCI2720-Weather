@@ -1,5 +1,18 @@
 .App {
   text-align: center;
+  background-image:url('./background.jpg');
+  height: 100vh;
+  width: 100%;
+  display: flex;
+
+  flex-direction: column;
+  background-position-x: center;
+  background-position-y: center;
+  background-repeat: no-repeat;
+  position: relative;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
 }
 
 .App-logo {
@@ -36,3 +49,17 @@
     transform: rotate(360deg);
   }
 }
+
+
+.header {
+  font-size:5rem;
+  font-weight: 600;
+  background: linear-gradient(to right, rgb(99, 128, 93), rgb(85, 88, 134));
+  -webkit-background-clip: text;
+  color: white;
+  padding:5%;
+  font-family: 'Dancing Script', cursive;
+  justify-content: center;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap');
