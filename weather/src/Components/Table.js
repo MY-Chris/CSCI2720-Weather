@@ -4,14 +4,24 @@ import mockdata from "../data.json";
 export default class Table extends Component {
   constructor(props) {
     super(props);
-    this.state = { tableData: mockdata, columns:  [
-      { label: "Full Name", accessor: "full_name", sortable: true },
-      { label: "Email", accessor: "email", sortable: false },
-      { label: "Gender", accessor: "gender", sortable: true },
-      { label: "Age", accessor: "age", sortable: true },
-      { label: "Favourite", accessor: "favourite", sortable: true },
+    this.state = { tableData: [], columns:  [
+      { label: "City Name", accessor: "locName", sortable: true },
+      { label: "Latitude", accessor: "latitude", sortable: true },
+      { label: "Longitude", accessor: "longitude", sortable: true },
     ],
     sortField: "", order: "asc"};
+  }
+
+  componentDidMount() {
+    (async () => {
+      const data = await fetch(
+        "http://localhost:3001/locations"
+      )
+      .then((res) => res.json())
+      .then((data) => data);
+      console.log(data);
+      this.setState({tableData: data});
+    })();
   }
 
   handleSorting = (sortField, sortOrder) => {
@@ -104,17 +114,10 @@ export default class Table extends Component {
         <tbody>
         {this.state.tableData.map((data) => {
           return (
-            <tr key={data.id}>
+            <tr key={data._id}>
               {this.state.columns.map(({ accessor }) => {
-                if(accessor == "full_name"){
-                  const tData = data[accessor];
-                  return (<td key={accessor}>
-                            <a href = {`http://localhost:3000/info/${data[accessor]}`}>
-                              {tData}
-                            </a>
-                          </td>)
-                }
-                else if(accessor == "favoutite"){
+                console.log(accessor);
+                if(accessor == "locName"){
                   const tData = data[accessor];
                   return (<td key={accessor}>
                             <a href = {`http://localhost:3000/info/${data[accessor]}`}>

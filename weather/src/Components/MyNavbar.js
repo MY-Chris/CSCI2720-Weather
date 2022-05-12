@@ -124,7 +124,7 @@ export default class NavbarComp extends Component {
                                 <Nav.Link as={Link} to="/signup">Sign up</Nav.Link>
 
                                 <Nav.Link as={Link} to="/table">Table</Nav.Link>
-                                <Nav.Link as={Link} to="/tablesearch">Search</Nav.Link>
+                                <Nav.Link as={Link} to="/locations_search">Search</Nav.Link>
                                 <Nav.Link as={Link} to="/mapgoogle">Map</Nav.Link>
                                 <Nav.Link as={Link} to="/favourites">Favourites</Nav.Link>
 
@@ -142,7 +142,7 @@ export default class NavbarComp extends Component {
 
                         <Route exact path="/table" element={<Table/>}/>
 
-                        <Route exact path="/tablesearch" element={<TableSearch/>}/>
+                        <Route exact path="/locations_search" element={<TableSearch/>}/>
 
                         <Route exact path="/mapgoogle" element={<MapGoogle/>}/>
 

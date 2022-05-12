@@ -6,17 +6,9 @@ import favourite from '../images/favourite.png'
 export default class Favourites extends Component {
     constructor(props) {
         super(props);
-        this.state = {favourites: ['London', 'Hong Kong'], unfavourite: false};
-
-        this.unFavourite = this.unFavourite.bind(this);
+        this.state = {favourites: ['London', 'Hong Kong']};
       }
 
-    unFavourite(data){
-        this.setState({unfavourite: !this.state.unfavourite});
-        console.log(this.state.unfavourite);
-        //window.location.reload(false);
-        console.log(data);
-    }
 
     render() {
         return (
@@ -35,14 +27,15 @@ export default class Favourites extends Component {
                 <tbody>
                 {this.state.favourites.map((data) => {
                 return (
-                    <tr key={data.id}>
+                    <tr key={data}>
                     
                         <td>
-                            {data}
+                            <a href = {`http://localhost:3000/info/${data}`}>
+                              {data}
+                            </a>
                         </td>
                         <td>
-                        <button onClick={ () => this.unFavourite(data)}>{this.state.unfavourite? <img src={unfavourite} width={25} /> 
-                            : <img src={favourite} width={25} />}</button>
+                        <button>{<img src={favourite} width={25} />}</button>
                         </td>
                     
                     </tr>

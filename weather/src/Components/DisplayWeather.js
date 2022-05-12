@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./displayweather.css";
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
-import { ToggleButton } from 'react-bootstrap';
+import { ToggleButton, Container, Row, Col } from 'react-bootstrap';
 import unfavourite from '../images/unfavourite.png'
 import favourite from '../images/favourite.png'
 
@@ -53,9 +53,9 @@ export class DisplayWeather extends Component{
       }
   },
   comments:[
-    {user: "user1", comment: "user1, London"},
-    {user: "user2", comment: "user2, London"},
-    {user: "user3", comment: "user3, London"}
+    {id: 1, user: "user1", comment: "user1, London"},
+    {id: 2, user: "user2", comment: "user2, London"},
+    {id: 3, user: "user3", comment: "user3, London"}
   ],
   favourite: true};
   this.setChecked = this.setChecked.bind(this);
@@ -98,18 +98,25 @@ export class DisplayWeather extends Component{
     this.setState({favourite: !this.state.favourite});
     console.log(this.state.favourite)
   }
+
+  processform(e){
+    console.log(document.getElementById("new-comment").value);
+  }
   
 
   render(){
   return (
+    <Container>
     <div>
+    <Row>
+    <Col>
     <div className="displayweather">
       
         <React.Fragment>
           <div className="maincard">
             <span className="cardtitle">
               Weather in {this.state.data.location.name} , {this.state.data.location.country}
-              &emsp;
+              &emsp;&emsp;&emsp;
               {/*
                 <ToggleButton
                   className="mb-2"
@@ -139,7 +146,7 @@ export class DisplayWeather extends Component{
               °C
             </h1>&emsp;
             {/*<span className="weather-main">{data.weather[0].main}</span>8*/}
-            <img className="weather-icon" src={`http:${this.state.data.current.condition.icon}`} alt="" srcset="" />
+            <img className="weather-icon" src={`http:${this.state.data.current.condition.icon}`} alt="" srcSet="" />
             <span className="weather-description">
               {" "}
               {this.state.data.current.condition.text}
@@ -240,15 +247,16 @@ export class DisplayWeather extends Component{
         </React.Fragment>
 
     </div>
-    <br></br>
-    <div className="container">
-    <section id="commentsSec" className="col-md-8 grad1">
+    </Col>
+    <Col>
+    <div className="comments">
+    <section id="commentsSec" className="grad1">
             <h3 id="heading4" className="text-center">Comments</h3>
             <i>Please scroll down to see all the comments.&emsp;&emsp;&emsp;</i>
             <div id="comments" className="ScrollStyle"> 
             {this.state.comments.map((data) => {
               return (
-                <div>
+                <div key={data.id}>
                   <h5>{data.user}</h5>
                   <p>{data.comment}</p>
                 </div>
@@ -264,10 +272,14 @@ export class DisplayWeather extends Component{
                 Comment cannot be empty.
               </div>
             </div>
-            <button id="addcomment" type="button" className="btn btn-primary" onclick="processform()">Add comment</button>
+            <button id="addcomment" type="button" className="btn btn-primary" onClick={this.processform}>Add comment</button>
             </form>
           </section>
             </div>
+    </Col>
+    </Row>
+    <br></br>
+    
         <br></br>
         
         <div className="container">
@@ -285,6 +297,7 @@ export class DisplayWeather extends Component{
             </div>
           
     </div>
+    </Container>
   );
       }
 }

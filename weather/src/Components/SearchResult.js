@@ -3,12 +3,10 @@ import React, { Component } from "react";
 export default class SearchResult extends Component {
   constructor(props) {
     super(props);
-    this.state = { tableData: this.props.resultData, columns:  [
-      { label: "Full Name", accessor: "full_name", sortable: true },
-      { label: "Email", accessor: "email", sortable: false },
-      { label: "Gender", accessor: "gender", sortable: true },
-      { label: "Age", accessor: "age", sortable: true },
-      { label: "Start date", accessor: "start_date", sortable: true },
+    this.state = { tableData: this.props.resultData, columns: [
+      { label: "City Name", accessor: "cityname", sortable: true },
+      { label: "Latitude", accessor: "latitude", sortable: true },
+      { label: "Longitude", accessor: "longitude", sortable: true },
     ],
     sortField: "", order: "asc"};
   }
@@ -62,7 +60,7 @@ export default class SearchResult extends Component {
     <div>
     <div className="table_container">
       <br></br>
-      <h3>Location List</h3>
+      <h3>Search Result</h3>
       <small>
         Please click the up / down arrow at a field head to sort the table with 
         that field in ascending / descending order.

@@ -59,6 +59,7 @@ export default class TableSearch extends Component {
   
     render() {
       let searchbox;
+      let formaction;
       if(this.state.field == "latitude" || this.state.field == "longitude"){
         console.log("lat/lon");
         searchbox =
@@ -66,31 +67,30 @@ export default class TableSearch extends Component {
         <small>Please input an interval:</small>&emsp;
         <input type="text" value={this.state.value} onChange={this.handleChange} />&emsp;
         <input type="text" value={this.state.value2} onChange={this.handleChange2} />
-        </div>
+        </div>;
+        formaction = "/locations_search/" + this.state.field + "/" + this.state.value + "/" + this.state.value2;
+        console.log(formaction)
       }
       else{
         searchbox =
         <div>
-        <small>Please input a name:</small>&emsp;
+        <small>Please input a city:</small>&emsp;
         <input type="text" value={this.state.value} onChange={this.handleChange} />
         </div>
+        formaction = "/locations_search/locName/" + this.state.value;
       }
 
       return (
         <div>
             <br></br>
 
-        <form>           
+        <form action={formaction}>           
             {searchbox}
             <input type="button" value="Submit" onClick={(e) => this.handleSubmit(e)}/>
             <p className="notice-start"> Please select a search field:</p>
             <div className="option">
                 <input className = "radio" type="radio" name="search_type" value="city" onChange={(e) => this.handleRadio(e)} required />
                 <label> Search by City Name</label>
-            </div>
-            <div className="option">
-                <input className = "radio" type="radio" name="search_type" value="country" onChange={(e) => this.handleRadio(e)} required />
-                <label> Search by Country</label>
             </div>
             <div className="option">
                 <input className = "radio" type="radio" name="search_type" value="latitude" onChange={(e) => this.handleRadio(e)} required />

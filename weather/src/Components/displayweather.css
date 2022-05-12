@@ -20,7 +20,6 @@ button {
 .displayweather {
   margin-top: 20px;
   display: flex;
-  margin-left: 20px;
   flex-flow: column nowrap;
   /*background-image: radial-gradient(rgb(221, 233, 241) 5%, white);*/
 }
@@ -92,12 +91,11 @@ button {
 
 .displayweather .weatherdetails {
   margin-left: 10px;
-  margin-right: 520px;
 
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 40% 50%;
   grid-template-rows: auto;
-  grid-gap: 20px;
+  grid-gap: -40px;
 }
 
 .displayweather .weatherdetails .section1 {
@@ -124,7 +122,32 @@ td {
 }
 
 .ScrollStyle{
-  max-height: 150px;
+  max-height: 250px;
   overflow-y: scroll;
+}
+
+.comments{
+  margin-top: 40px;
+  height: 256px;
+  display: flex;
+  flex-flow: column nowrap;
+  border-radius: 20px;
+}
+
+.comments .comments-card{
+  width: 540px;
+  height: 256px;
+  margin-top: 20px;
+  margin-bottom: 0px;
+  align-self: left;
+  padding: 50px;
+  border-radius: 20px;
+  position: relative;
+  background: rgb(220, 235, 252);
+  background-image: radial-gradient(rgb(221, 233, 241) 45%, white);
+}
+
+.grad1{
+  background-image: radial-gradient(rgb(221, 233, 241) 45%, white);
 }
 
