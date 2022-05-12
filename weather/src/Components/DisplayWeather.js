@@ -44,7 +44,7 @@ export const options = {
 const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
 export const chartdata = {
-  labels,
+  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
   datasets: [
     {
       label: 'Dataset 1',
@@ -102,10 +102,26 @@ export class DisplayWeather extends Component{
   ],
   favourite: true,
   past10h: {},
-  data1: {},
+  data1: {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    datasets: [
+      {
+        label: 'Dataset 1',
+        data: [100, 200, 300, 400, 500, 200, 300],
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      },
+      {
+        label: 'Dataset 2',
+        data: [200, 500, 200, 100, 800, 600, 700],
+        borderColor: 'rgb(53, 162, 235)',
+        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+      },
+    ],
+  },
   past5d: {},
   data2: {
-    labels,
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     datasets: [
       {
         label: 'Dataset 1',
@@ -148,7 +164,23 @@ export class DisplayWeather extends Component{
   componentDidMount() {
     let cityurl = window.location.pathname;
     let cityinurl = cityurl.substring(cityurl.lastIndexOf('/') + 1);
+    
+
     (async () => {
+      const data = await fetch(
+        "http://localhost:3001/locations/" + cityinurl + "/users/" + "627be65d731afd1b3293a027"
+      )
+      .then((res) => res.json())
+      .then((data) => data);
+      console.log(data);
+      this.setState({data: data.data});
+      this.setState({comments: data.comments});
+      this.setState({favourite: data.favourite})
+    })();
+    //console.log(cityinurl);
+    
+    (async () => {
+      //console.log(this.state.data.data);
       const data = await fetch(
         "http://localhost:3001/history/past5days/" + cityinurl
       )
@@ -159,19 +191,25 @@ export class DisplayWeather extends Component{
     console.log(data.label);
       let label2 = data.label;
     let generatedata2 = {
-      label2,
+      labels: label2,
       datasets: [
         {
-          label: 'Dataset 1',
-          data: [100, 200, 300, 400, 500, 200, 300],
+          label: 'Temperature (°C)',
+          data: data.data.temp_c,
           borderColor: 'rgb(255, 99, 132)',
           backgroundColor: 'rgba(255, 99, 132, 0.5)',
         },
         {
-          label: 'Dataset 2',
-          data: [200, 500, 200, 100, 800, 600, 700],
+          label: 'Humidity (%)',
+          data: data.data.humidity,
           borderColor: 'rgb(53, 162, 235)',
           backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        },
+        {
+          label: 'Visibility (km)',
+          data: data.data.vis_km,
+          borderColor: 'rgb(53, 9, 123)',
+          backgroundColor: 'rgba(53, 9, 123, 0.5)',
         },
       ],
     };
@@ -181,15 +219,43 @@ export class DisplayWeather extends Component{
     })();
 
     (async () => {
+      //console.log(this.state.data.data);
       const data = await fetch(
-        "http://localhost:3001/locations/" + cityinurl + "/users/" + "627be65d731afd1b3293a027"
+        "http://localhost:3001/history/past10hours/" + cityinurl
       )
       .then((res) => res.json())
       .then((data) => data);
       console.log(data);
+      this.setState({label1: data.label});
+    console.log(data.label);
+      let label1 = data.label;
+    let generatedata1 = {
+      labels: label1,
+      datasets: [
+        {
+          label: 'Temperature (°C)',
+          data: data.data.temp_c,
+          borderColor: 'rgb(255, 99, 132)',
+          backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        },
+        {
+          label: 'Humidity (%)',
+          data: data.data.humidity,
+          borderColor: 'rgb(53, 162, 235)',
+          backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        },
+        {
+          label: 'Wind (km/h)',
+          data: data.data.wind_kph,
+          borderColor: 'rgb(53, 9, 123)',
+          backgroundColor: 'rgba(53, 9, 123, 0.5)',
+        },
+      ],
+    };
+    console.log(generatedata1);
+    this.setState({data1: generatedata1});
+    console.log(this.state.data1);
     })();
-    //console.log(cityinurl);
-    
   }
 
   displayMarkers = () => {
@@ -406,10 +472,11 @@ export class DisplayWeather extends Component{
             <i>Please scroll down to see all the comments.&emsp;&emsp;&emsp;</i>
             <div id="comments" className="ScrollStyle"> 
             {this.state.comments.map((data) => {
+              console.log(data);
               return (
-                <div key={data.id}>
-                  <h5>{data.user}</h5>
-                  <p>{data.comment}</p>
+                <div key={data._id}>
+                  <h5>{data.username}</h5>
+                  <p>{data.content}</p>
                 </div>
               );
             })}
@@ -469,7 +536,7 @@ export class DisplayWeather extends Component{
     <Row>
     <div className="chart">
       <Col>
-    <Line options={options} data={chartdata} />
+    <Line options={options} data={this.state.data1} />
     </Col>
     <Col>
     <Line options={options} data={this.state.data2} />
