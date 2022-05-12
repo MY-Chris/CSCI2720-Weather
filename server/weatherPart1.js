@@ -46,8 +46,8 @@ const searchLocations = async function(res, field, key1, key2 = undefined){
     let locations = [];
      
     if (key2 == undefined){
-        // add partial search
-        locations = await schemas.Location.find({locName: key1}).select('_id locName latitude longitude').lean().exec();  
+        // partial search
+        locations = await schemas.Location.find({locName: { $regex:  ".*" + key1 + ".*", $options: 'i' } }).select('_id locName latitude longitude').lean().exec();  
     }else{
         if (key1 > key2){
             [key1, key2] = [key2, key1];
