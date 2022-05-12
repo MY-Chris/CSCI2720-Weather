@@ -1,6 +1,7 @@
 // import schema
 const schemas = require('./schema.js');
 const axios = require('axios');
+const res = require('express/lib/response');
 
 const weatherRequest = async (url) => {
     const res = await axios.get(url).then(res => res.data).catch(error =>{console.log(error);});
@@ -115,8 +116,23 @@ const weatherHistoryP10h = async function(locName,  res){
     res.send(result);
 }
 
+const updateTheme = function( userId, theme, res){
+    schemas.User.findOneAndUpdate(
+        {_id: userId},
+        {preference: theme},
+        function (err, response) {
+            if (err)
+                console.log(err);
+            else
+                console.log(response);
+                res.send("Successful!")
+        }
+    );
+    
+}
+
 // export function
-module.exports = {weatherRequest, locationsWIthWeather, locations, searchLocations, weatherHistoryP5d, weatherHistoryP10h};
+module.exports = {weatherRequest, locationsWIthWeather, locations, searchLocations, weatherHistoryP5d, weatherHistoryP10h, updateTheme};
 
 
 

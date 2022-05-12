@@ -38,6 +38,7 @@ app.use(morgan('myformat', {"stream": accessLogStream}));
 app.get('/locations/:locName/users/:userId', (req, res) => {
     myfunctions2.showLocationDetail(req.params.locName, req.params.userId, res);
 });
+
 app.put('/locations/:locName/users/:userId', (req, res) => {
     myfunctions2.addComment(req.body['content'], req.params.locName, req.params.userId);
 });
@@ -78,7 +79,7 @@ app.get('/locations_search/:field/:key1/:key2', (req, res) => {
     myfunctions1.searchLocations(res, req.params.field, req.params.key1, req.params.key2);
 });
 
-//"2022-05-12 16:06"
+//estr feature history
 app.get('/history/past5days/:locName', (req, res) => {
     myfunctions1.weatherHistoryP5d(req.params.locName, res);
 });
@@ -87,7 +88,10 @@ app.get('/history/past10hours/:locName', (req, res) => {
     myfunctions1.weatherHistoryP10h(req.params.locName, res);
 });
 
-
+// estr feature color theme
+app.put('/users/theme', (req, res) => {
+    myfunctions1.updateTheme(req.body['userId'], req.body['theme'], res);
+});
 
 //GraphQL
 const typeDefs = gql`
