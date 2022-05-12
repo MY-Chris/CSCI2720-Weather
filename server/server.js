@@ -11,6 +11,7 @@ const cors = require('cors');
 const res = require('express/lib/response');
 app.use(cors());
 const axios = require('axios');
+const moment = require('moment-timezone');
 
 const schemas = require('./schema.js');
 const myfunctions1 = require('./weatherPart1.js');
@@ -21,9 +22,14 @@ db.on('error', console.error.bind(console, 'Connection error:'));
 db.once('open', function () {
     console.log("Connection is open...");
 });
-
+console.log(moment().tz('Asia/Beijing').format());
+morgan.token('date', (req, res, tz) => {
+    return moment().tz(tz).format();
+});
+morgan.format('myformat', ':remote-addr - [:date[Asia/Beijing]] ":method :url HTTP/:http-version" ":user-agent"');
 const accessLogStream = fs.createWriteStream(__dirname + '/access.log', {flags: 'a'});
-app.use(morgan(':remote-addr - [:date[clf]] ":method :url HTTP/:http-version" ":user-agent"', {"stream": accessLogStream}));
+app.use(morgan('myformat', {"stream": accessLogStream}));
+
 
 //Add Routes here
 
