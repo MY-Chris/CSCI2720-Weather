@@ -55,16 +55,6 @@ export const chartdata = {
     {
       label: 'Dataset 2',
       data: [200, 500, 200, 100, 800, 600, 700],
-      /*{
-        '0': 700,
-        '1': 200,
-        '2': 400,
-        '3': 300,
-        '4': 400,
-        '5': 600,
-        '6': 100
-      },
-      */
       borderColor: 'rgb(53, 162, 235)',
       backgroundColor: 'rgba(53, 162, 235, 0.5)',
     },
@@ -110,7 +100,29 @@ export class DisplayWeather extends Component{
     {id: 2, user: "user2", comment: "user2, London"},
     {id: 3, user: "user3", comment: "user3, London"}
   ],
-  favourite: true};
+  favourite: true,
+  past10h: {},
+  data1: {},
+  past5d: {},
+  data2: {
+    labels,
+    datasets: [
+      {
+        label: 'Dataset 1',
+        data: [100, 200, 300, 400, 500, 200, 300],
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      },
+      {
+        label: 'Dataset 2',
+        data: [200, 500, 200, 100, 800, 600, 700],
+        borderColor: 'rgb(53, 162, 235)',
+        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+      },
+    ],
+  },
+  label1: [],
+  label2: []};
   this.setChecked = this.setChecked.bind(this);
   this.handleFavourite = this.handleFavourite.bind(this);
   }
@@ -132,6 +144,53 @@ export class DisplayWeather extends Component{
   */
 
   //iconurl = data.current.condition.icon.substring(2);
+
+  componentDidMount() {
+    let cityurl = window.location.pathname;
+    let cityinurl = cityurl.substring(cityurl.lastIndexOf('/') + 1);
+    (async () => {
+      const data = await fetch(
+        "http://localhost:3001/history/past5days/" + cityinurl
+      )
+      .then((res) => res.json())
+      .then((data) => data);
+      console.log(data);
+      this.setState({label2: data.label});
+    console.log(data.label);
+      let label2 = data.label;
+    let generatedata2 = {
+      label2,
+      datasets: [
+        {
+          label: 'Dataset 1',
+          data: [100, 200, 300, 400, 500, 200, 300],
+          borderColor: 'rgb(255, 99, 132)',
+          backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        },
+        {
+          label: 'Dataset 2',
+          data: [200, 500, 200, 100, 800, 600, 700],
+          borderColor: 'rgb(53, 162, 235)',
+          backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        },
+      ],
+    };
+    console.log(generatedata2);
+    this.setState({data2: generatedata2});
+    console.log(this.state.data2);
+    })();
+
+    (async () => {
+      const data = await fetch(
+        "http://localhost:3001/locations/" + cityinurl + "/users/" + "627be65d731afd1b3293a027"
+      )
+      .then((res) => res.json())
+      .then((data) => data);
+      console.log(data);
+    })();
+    //console.log(cityinurl);
+    
+  }
 
   displayMarkers = () => {
       return <Marker position={{
@@ -177,7 +236,7 @@ export class DisplayWeather extends Component{
             headers: {
             "Content-Type": "application/x-www-form-urlencoded",
             },
-            mode: 'cors',
+            //mode: 'cors',
             method: 'PUT',
             body: data
         })
@@ -185,14 +244,18 @@ export class DisplayWeather extends Component{
         .then(data => {
             data.replace(/\n/g, "");
             console.log("put done!");
-            console.log(data);
+            //console.log(data);
             // need reloading?
             //window.location.reload(false);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
         });
   }
   
 
   render(){
+
   return (
     <Container>
     <div>
@@ -409,7 +472,7 @@ export class DisplayWeather extends Component{
     <Line options={options} data={chartdata} />
     </Col>
     <Col>
-    <Line options={options} data={chartdata} />
+    <Line options={options} data={this.state.data2} />
     </Col>
     </div>
     </Row> 

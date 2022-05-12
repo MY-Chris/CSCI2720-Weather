@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./table.css";
 import mockdata from "../data.json";
 
 export default class Table extends Component {
@@ -68,6 +69,11 @@ export default class Table extends Component {
     }
   };
 
+  
+  setTheme = (theme) => {
+    document.documentElement.className = theme;
+  }
+
   redirect(e){
     window.location.pathname = `http://localhost:3000/`
   }
@@ -75,6 +81,14 @@ export default class Table extends Component {
   render(){
   return (
     <div>
+      <div className="toggle-container">
+    <button className="theme-btn light" onclick={this.setTheme('light')} title="Light mode">
+      <img src="https://assets.codepen.io/210284/sun.png" alt="sun" />
+    </button>
+    <button className="theme-btn dark" onclick={this.setTheme('dark')} title="Dark mode">
+      <img src="https://assets.codepen.io/210284/moon.png" alt="moon" />
+    </button>
+  </div>
     <div className="table_container">
       <br></br>
       <h3>Location List</h3>
