@@ -7,24 +7,7 @@ app.use(cors());
 const axios = require('axios');
 
 const schemas = require('./schema.js');
-
-function loadCurrentWeather(loc) {
-    console.log(loc);
-    key = "072f5ae9c4c849f8858104048220805";
-    url = "http://api.weatherapi.com/v1/current.json?key=" + key + "&q=" + loc;
-    axios.get(url)
-    .then(res => {
-        let temp_c = res.data.current.temp_c;
-        let wind_kph = res.data.current.wind_kph;
-        let wind_dir = res.data.current.wind_dir;
-        let humidity = res.data.current.humidity;
-        let precip_mm = res.data.current.precip_mm;
-        let vis_km = res.data.current.vis_km;
-        console.log(res);
-        //res.send(...)
-    })
-    .catch(err => console.log("Failed to load current weather from WeatherAPI"));
-}
+const myfunctions1 = require('./weatherPart1.js');
 
 //User feature 5, add location into a list of user's favorite locations
 function addFavoriteLocation (locName, userId) {
@@ -40,6 +23,22 @@ function addFavoriteLocation (locName, userId) {
     );
 }
 
+//User feature 5, remove location from a list of user's favorite locations
+async function removeFavoriteLocation (locName, userId) {
+    schemas.User.findOneAndUpdate(
+        {_id: userId},
+        {$pull: {favoriteLocs: locName}},
+        function (err, res) {
+            console.log(res);
+            if (err)
+                res.send("Something Wrong!")
+            else {
+                res.s
+            }
+        }
+    );
+}
+
 //User feature 5, list all favorite locations of a user
 function listAllLocations (userId, res) {
     let loclist = [];
@@ -50,29 +49,31 @@ function listAllLocations (userId, res) {
         user.favoriteLocs.forEach(element => {
             list.push(element);
         });
-        console.log(list);
-        return list; //change to res.send(...)
+        res.send(JSON.stringify(list));
     });
 }
 
 //User feature 4, show location details
-function showLocationDetail (locName, res) {
-    schemas.Location.findOne({locName: locName})
-    .populate('comments')
-    .exec(function (err, loc) {
-        if (err)
-            console.log(err);
-        if (loc != null) {
-            console.log(loc.locName);
-            console.log(loc.latitude);
-            console.log(loc.longitude);
-            loc.comments.forEach(element => {
-                console.log(element.content);
-            })
-            loadCurrentWeather(loc.locName);
-            //change to res.send(...)
-        }
+async function showLocationDetail (locName, userId, res) {
+    const loc = await schemas.Location.findOne({locName: locName}).lean().populate({path: "comments", populate: {path: "commentUser"}}).exec();
+    const user = await schemas.User.findById(userId).lean().exec();
+    url = "http://api.weatherapi.com/v1/current.json?key=9035794a7a4444e99da32445220105&q=";
+    const weather_info = await myfunctions1.weatherRequest(url + loc.locName);
+    let result = {};
+    result.data = weather_info;
+    result.data.location.lat = loc.latitude;
+    result.data.location.lon = loc.longitude;
+    result.comments = loc.comments;
+    result.comments.forEach(comment => {
+        comment.username = comment.commentUser.username;
     });
+    result.favourite = false;
+    user.favoriteLocs.forEach(element => {
+        if (element === locName)
+            result.favourite = true;
+    });
+    console.log(result);
+    res.send(JSON.stringify(result));
 }
 
 //User feature 4, add a new comment
@@ -115,4 +116,4 @@ function addComment(content, locName, userId) {
     })
 }
 
-module.exports = {loadCurrentWeather, addFavoriteLocation, listAllLocations, showLocationDetail, addComment};
+module.exports = {addFavoriteLocation, removeFavoriteLocation, listAllLocations, showLocationDetail, addComment};
