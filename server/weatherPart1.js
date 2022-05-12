@@ -4,21 +4,29 @@ const axios = require('axios');
 
 const weatherRequest = async (url) => {
     const res = await axios.get(url).then(res => res.data).catch(error =>{console.log(error);});
-    //console.log(res);
+    console.log(res);
     return res;
 };
 
+const pushWeather = (data, info) => {
+    data.push({
+        temp_c : info.temp_c,
+        wind_kph : info.wind_kph,
+        wind_dir : info.wind_dir,
+        wind_degree : info.wind_degree,
+        humidity : info.humidity,
+        precip_mm : info.precip_mm,
+        vis_km : info.vis_km
+    })
+}
 
 // User feature 1, return all locations name lat long and weather info
 const locationsWIthWeather = async function(res){
     let locations = await schemas.Location.find().select('_id locName latitude longitude').lean().exec();  
-    console.log("Locations: ");
-    console.log( locations);
 
     url = "http://api.weatherapi.com/v1/current.json?key=9035794a7a4444e99da32445220105&q=";
     for (loc of locations){
         let weather_info = await weatherRequest(url + loc.locName);
-        //axios.get(url + loc.locName).then(res => res.data).catch(error =>{console.log(error);});
         loc.temp_c = weather_info.current.temp_c;
         loc.wind_kph = weather_info.current.wind_kph;
         loc.wind_dir = weather_info.current.wind_dir;
@@ -33,8 +41,6 @@ const locationsWIthWeather = async function(res){
 // User feature 2, return all locations name lat long
 const locations = async function(res){
     let locations = await schemas.Location.find().select('_id locName latitude longitude').lean().exec();  
-    //console.log("Locations: ");
-    //console.log( locations);
     res.send(locations);
 }
 
@@ -55,43 +61,59 @@ const searchLocations = async function(res, field, key1, key2 = undefined){
     res.send(locations);
 }
 
-// this function is incomplete
+
+ 
 const weatherHistoryP5d = async function(locName, res){
     let today = new Date();
-    let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     let hour = today.getHours();
+    today.setDate(today.getDate() - 1);
+    let endDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    today.setDate(today.getDate() - 5);
+    let startDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    
     let result = {label:[], data:[]};
-
     url = "http://api.weatherapi.com/v1/history.json?key=9035794a7a4444e99da32445220105&q=";
+    let weather_info = await weatherRequest(url + locName + "&dt=" + startDate + "&end_dt=" + endDate + "&hour=" + hour);
+    //console.log(weather_info);
+
     for (let i = 0; i < 5 ; i++ ){
-        today.setDate(today.getDate() - 1);
-        date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-        let weather_info = await weatherRequest(url + locName + "&dt=" + date + "&hour=" + hour);
         result.label.push((today.getMonth()+1)+'.'+today.getDate());
-        result.data.push({
-            temp_c : weather_info.forecast.forecastday[0].hour[0].temp_c,
-            wind_kph : weather_info.forecast.forecastday[0].hour[0].wind_kph,
-            wind_dir : weather_info.forecast.forecastday[0].hour[0].wind_dir,
-            wind_degree : weather_info.forecast.forecastday[0].hour[0].wind_degree,
-            humidity : weather_info.forecast.forecastday[0].hour[0].humidity,
-            precip_mm : weather_info.forecast.forecastday[0].hour[0].precip_mm,
-            vis_km : weather_info.forecast.forecastday[0].hour[0].vis_km
-        })
+        pushWeather(result.data, weather_info.forecast.forecastday[i].hour[0]);
+        today.setDate(today.getDate() + 1);
     }
     res.send(result);
 }
 
+// "2022-05-12 15:31"
+// hour = 10 , 0-9.  hour = 4, 18 19 20 21 22 23  0 1 2 3 3  10-5 = 5  14 + x = 18
 const weatherHistoryP10h = async function(locName, res){
+    let today = new Date();
+    let hour = today.getHours();
+    //hour = 4;
     
+    let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+
+    
+    let result = {label:[], data:[]};
     url = "http://api.weatherapi.com/v1/history.json?key=9035794a7a4444e99da32445220105&q=";
-    for (loc of locations){
-        let weather_info = await weatherRequest(url + loc.locName + "&dt=2022-05-9&hour=11");
-        //axios.get(url + loc.locName).then(res => res.data).catch(error =>{console.log(error);});
-        loc.weather1 = weather_info
-        loc.weather2 = await weatherRequest(url + loc.locName + "&dt=2022-05-10&hour=11");
-        loc.weather3 = await weatherRequest(url + loc.locName + "&dt=2022-05-11&hour=11");
+    let weather_info = await weatherRequest(url + locName + "&dt=" + date );
+    //console.log(weather_info);
+
+    if (hour < 10){ // need data from yesterday
+        today.setDate(today.getDate() - 1);
+        let date_yes = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        let weather_info_yes = await weatherRequest(url + locName + "&dt=" + date_yes );
+        // [ 14 + hour ,  23 ]
+        for (let i = 14 + hour; i < 24 ; i++){
+            result.label.push( i +':00');
+            pushWeather(result.data, weather_info_yes.forecast.forecastday[0].hour[i]);
+        }
     }
-    res.send(locations);
+    for (let i = Math.max( 0, hour - 10) ; i < hour ; i++ ){
+        result.label.push( i +':00');
+        pushWeather(result.data, weather_info.forecast.forecastday[0].hour[i]);
+    }
+    res.send(result);
 }
 
 
