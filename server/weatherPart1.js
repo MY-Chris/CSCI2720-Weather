@@ -9,15 +9,13 @@ const weatherRequest = async (url) => {
 };
 
 const pushWeather = (data, info) => {
-    data.push({
-        temp_c : info.temp_c,
-        wind_kph : info.wind_kph,
-        wind_dir : info.wind_dir,
-        wind_degree : info.wind_degree,
-        humidity : info.humidity,
-        precip_mm : info.precip_mm,
-        vis_km : info.vis_km
-    })
+    data.temp_c.push(info.temp_c);
+    data.wind_kph.push(info.wind_kph);
+    data.wind_dir.push(info.wind_dir);
+    data.wind_degree.push(info.wind_degree);
+    data.humidity.push(info.humidity);
+    data.precip_mm.push(info.precip_mm);
+    data.vis_km.push(info.vis_km);
 }
 
 // User feature 1, return all locations name lat long and weather info
@@ -71,7 +69,7 @@ const weatherHistoryP5d = async function(locName, locTime, res){
     today.setDate(today.getDate() - 4);
     let startDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     
-    let result = {label:[], data:[]};
+    let result = {label:[], "data":{temp_c: [], wind_kph: [], wind_dir:[], wind_degree: [], humidity: [], precip_mm: [], vis_km: []}};
     url = "http://api.weatherapi.com/v1/history.json?key=9035794a7a4444e99da32445220105&q=";
     let weather_info = await weatherRequest(url + locName + "&dt=" + startDate + "&end_dt=" + endDate + "&hour=" + hour);
     //console.log(weather_info);
@@ -84,13 +82,14 @@ const weatherHistoryP5d = async function(locName, locTime, res){
     res.send(result);
 }
 
+
 // estr feature 1, return weather info in the past 10 hours
 const weatherHistoryP10h = async function(locName, locTime, res){
     let today = new Date(locTime);
     let hour = today.getHours();
     let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     
-    let result = {label:[], data:[]};
+    let result = {label:[], "data":{temp_c: [], wind_kph: [],  wind_dir:[], wind_degree: [], humidity: [], precip_mm: [], vis_km: []}};
     url = "http://api.weatherapi.com/v1/history.json?key=9035794a7a4444e99da32445220105&q=";
     let weather_info = await weatherRequest(url + locName + "&dt=" + date );
     //console.log(weather_info);
