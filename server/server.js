@@ -10,6 +10,7 @@ app.use(cors());
 const axios = require('axios');
 
 const schemas = require('./schema.js');
+const myfunctions1 = require('./weatherPart1.js');
 const myfunctions = require('./weatherPart2.js');
 
 const db = mongoose.connection;
@@ -37,6 +38,13 @@ app.put('/users/:userId/favorites', (req, res) => {
 });
 app.get('/users/:userId/favorites', (req, res) => {
     myfunctions.listAllLocations(req.params.userId, res);
+});
+
+app.get('/locations', (req, res) => {
+    myfunctions1.locations( res);
+});
+app.get('/locations_weather', (req, res) => {
+    myfunctions1.locationsWIthWeather( res);
 });
 
 const server = app.listen(3000);

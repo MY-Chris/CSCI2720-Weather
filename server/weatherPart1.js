@@ -1,5 +1,6 @@
 // import schema
-//const Location = require('./server');
+const schemas = require('./schema.js');
+const axios = require('axios');
 
 const weatherRequest = async (url) => {
     const res = await axios.get(url).then(res => res.data).catch(error =>{console.log(error);});
@@ -9,8 +10,8 @@ const weatherRequest = async (url) => {
 
 
 // User feature 1, return all locations name lat long and weather info
-const locations_weather = async function(req,res){
-    let locations = await Location.find().select('-_id locName latitude longitude').lean().exec();  
+const locationsWIthWeather = async function(res){
+    let locations = await schemas.Location.find().select('-_id locName latitude longitude').lean().exec();  
     console.log("Locations: ");
     console.log( locations);
 
@@ -30,8 +31,8 @@ const locations_weather = async function(req,res){
 
 
 // User feature 2, return all locations name lat long
-const locations = async function(req,res){
-    let locations = await Location.find().select('-_id locName latitude longitude').lean().exec();  
+const locations = async function(res){
+    let locations = await schemas.Location.find().select('-_id locName latitude longitude').lean().exec();  
     console.log("Locations: ");
     console.log( locations);
     res.send(locations);
