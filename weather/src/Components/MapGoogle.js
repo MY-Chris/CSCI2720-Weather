@@ -6,12 +6,10 @@ export class MapGoogle extends Component {
       super(props);
   
       this.state = {
-        stores: [{lat: 47.49855629475769, lng: -122.14184416996333},
-                {latitude: 47.359423, longitude: -122.021071},
-                {latitude: 47.2052192687988, longitude: -121.988426208496},
-                {latitude: 47.6307081, longitude: -122.1434325},
-                {latitude: 47.3084488, longitude: -122.2140121},
-                {latitude: 47.5524695, longitude: -122.0425407}]
+        stores: [
+          {"locName":"London","latitude":51.52,"longitude":-0.11},
+          {"locName":"Hong Kong","latitude":22.28,"longitude":114.15}
+        ]
       }
     }
   
@@ -21,7 +19,7 @@ export class MapGoogle extends Component {
          lat: store.latitude,
          lng: store.longitude
        }}
-       onClick={() => console.log("You clicked me!")} />
+       onClick={() => window.location.pathname = `../info/${store.locName}`} />
       })
     }
   
@@ -29,7 +27,7 @@ export class MapGoogle extends Component {
       return (
           <Map
             google={this.props.google}
-            zoom={8}
+            zoom={3}
             style={{
               width: '100%',
               height: '100%',

@@ -5,7 +5,7 @@
     "email": "wg@creative.org",
     "gender": "Male",
     "age": 100,
-    "start_date": "2022-01-26"
+    "favourite": 0
   },
   {
     "id": 2,
@@ -13,7 +13,7 @@
     "email": "smol@github.io",
     "gender": "Male",
     "age": 60,
-    "start_date": null
+    "favourite": 1
   },
   {
     "id": 3,
@@ -21,15 +21,15 @@
     "email": "orog@usatoday.com",
     "gender": "Male",
     "age": 50,
-    "start_date": "2021-06-23"
+    "favourite": 1
   },
   {
     "id": 4,
     "full_name": "Elwin Huyge",
-    "email": null,
+    "email": "123@456",
     "gender": "Male",
     "age": 34,
-    "start_date": "2021-06-07"
+    "favourite": 0
   },
   {
     "id": 5,
@@ -37,7 +37,7 @@
     "email": "amay@dyndns.org",
     "gender": "Female",
     "age": 31,
-    "start_date": "2021-07-05"
+    "favourite": 0
   },
   {
     "id": 6,
@@ -45,7 +45,7 @@
     "email": "aameri@ibm.com",
     "gender": "Male",
     "age": 35,
-    "start_date": "2021-03-09"
+    "favourite": 0
   },
   {
     "id": 7,
@@ -53,7 +53,7 @@
     "email": "lshimmans6@addthis.com",
     "gender": "Male",
     "age": null,
-    "start_date": "2021-06-03"
+    "favourite": 0
   },
   {
     "id": 8,
@@ -61,7 +61,7 @@
     "email": "pklug7@virginia.edu",
     "gender": "Female",
     "age": 36,
-    "start_date": "2021-09-19"
+    "favourite": 0
   },
   {
     "id": 9,
@@ -69,7 +69,7 @@
     "email": "mjakeway8@noaa.gov",
     "gender": "Female",
     "age": 48,
-    "start_date": "2021-01-07"
+    "favourite": 1
   },
   {
     "id": 10,
@@ -77,6 +77,6 @@
     "email": "jnickless9@dagon.com",
     "gender": "Male",
     "age": 36,
-    "start_date": "2021-02-05"
+    "favourite": 0
   }
 ]

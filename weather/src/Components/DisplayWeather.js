@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import "./displayweather.css";
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import { ToggleButton } from 'react-bootstrap';
+import unfavourite from '../images/unfavourite.png'
+import favourite from '../images/favourite.png'
 
 export class DisplayWeather extends Component{
   //const { data } = props;
@@ -53,7 +56,10 @@ export class DisplayWeather extends Component{
     {user: "user1", comment: "user1, London"},
     {user: "user2", comment: "user2, London"},
     {user: "user3", comment: "user3, London"}
-  ]};
+  ],
+  favourite: true};
+  this.setChecked = this.setChecked.bind(this);
+  this.handleFavourite = this.handleFavourite.bind(this);
   }
 
   /*
@@ -81,6 +87,17 @@ export class DisplayWeather extends Component{
      }}
      onClick={() => console.log("You clicked me!")} />
     }
+
+  setChecked(e){
+    console.log(e.currentTarget.checked);
+    this.setState({favourite: e.currentTarget.checked});
+    console.log(this.state.favourite)
+  }
+
+  handleFavourite(e){
+    this.setState({favourite: !this.state.favourite});
+    console.log(this.state.favourite)
+  }
   
 
   render(){
@@ -92,11 +109,29 @@ export class DisplayWeather extends Component{
           <div className="maincard">
             <span className="cardtitle">
               Weather in {this.state.data.location.name} , {this.state.data.location.country}
+              &emsp;
+              {/*
+                <ToggleButton
+                  className="mb-2"
+                  id="toggle-check"
+                  type="checkbox"
+                  variant="outline-warning"
+                  checked={this.state.favourite}
+                  value="1"
+                  onChange={(e) => this.setChecked(e)}
+                >
+                  Checked
+                </ToggleButton>
+             */}
+      
+      <button onClick={this.handleFavourite}>{this.state.favourite? <img src={favourite} width={25} /> 
+      : <img src={unfavourite} width={25} />}</button>
             </span>
+            
             <span className="cardsubtitle">
               Current time of time zone {this.state.data.location.tz_id}: {this.state.data.location.localtime}
             </span>
-
+          
             <h1>
               {" "}
               {this.state.data.current.temp_c}
@@ -110,6 +145,7 @@ export class DisplayWeather extends Component{
               {this.state.data.current.condition.text}
             </span>
             <span className="cardnote">
+            
               Last Updated: {this.state.data.current.last_updated}
             </span>
           </div>
@@ -233,6 +269,7 @@ export class DisplayWeather extends Component{
           </section>
             </div>
         <br></br>
+        
         <div className="container">
             <Map
                   google={this.props.google}
@@ -246,6 +283,7 @@ export class DisplayWeather extends Component{
                   {this.displayMarkers()}
                 </Map>
             </div>
+          
     </div>
   );
       }
