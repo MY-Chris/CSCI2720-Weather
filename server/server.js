@@ -12,6 +12,7 @@ const res = require('express/lib/response');
 app.use(cors());
 const axios = require('axios');
 const moment = require('moment-timezone');
+app.use(bodyParser.urlencoded({extended: false}));
 
 const schemas = require('./schema.js');
 const myfunctions1 = require('./weatherPart1.js');
