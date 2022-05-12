@@ -61,8 +61,10 @@ const searchLocations = async function(res, field, key1, key2 = undefined){
 
 
 // estr feature 1, return weather info in the past 5 days of the same hour 
-const weatherHistoryP5d = async function(locName, locTime, res){
-    let today = new Date(locTime);
+const weatherHistoryP5d = async function(locName, res){
+    let url = "http://api.weatherapi.com/v1/current.json?key=9035794a7a4444e99da32445220105&q=";
+    let locInfo = await weatherRequest(url + locName );
+    let today = new Date(locInfo.location.localtime);
     let hour = today.getHours();
     today.setDate(today.getDate() - 1);
     let endDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -84,8 +86,10 @@ const weatherHistoryP5d = async function(locName, locTime, res){
 
 
 // estr feature 1, return weather info in the past 10 hours
-const weatherHistoryP10h = async function(locName, locTime, res){
-    let today = new Date(locTime);
+const weatherHistoryP10h = async function(locName,  res){
+    let url = "http://api.weatherapi.com/v1/current.json?key=9035794a7a4444e99da32445220105&q=";
+    let locInfo = await weatherRequest(url + locName );
+    let today = new Date(locInfo.location.localtime);
     let hour = today.getHours();
     let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     
