@@ -17,7 +17,7 @@ const UserSchema = mongoose.Schema({
     searchHistory: [{type: String}],
     favoriteLocs: [{type: String}],
     comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}],
-    preference: String
+    preference: {type: String}
 });
 
 const LocationSchema = mongoose.Schema({

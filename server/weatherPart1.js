@@ -62,13 +62,13 @@ const searchLocations = async function(res, field, key1, key2 = undefined){
 }
 
 
- 
-const weatherHistoryP5d = async function(locName, res){
-    let today = new Date();
+// estr feature 1, return weather info in the past 5 days of the same hour 
+const weatherHistoryP5d = async function(locName, locTime, res){
+    let today = new Date(locTime);
     let hour = today.getHours();
     today.setDate(today.getDate() - 1);
     let endDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    today.setDate(today.getDate() - 5);
+    today.setDate(today.getDate() - 4);
     let startDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     
     let result = {label:[], data:[]};
@@ -84,15 +84,11 @@ const weatherHistoryP5d = async function(locName, res){
     res.send(result);
 }
 
-// "2022-05-12 15:31"
-// hour = 10 , 0-9.  hour = 4, 18 19 20 21 22 23  0 1 2 3 3  10-5 = 5  14 + x = 18
-const weatherHistoryP10h = async function(locName, res){
-    let today = new Date();
+// estr feature 1, return weather info in the past 10 hours
+const weatherHistoryP10h = async function(locName, locTime, res){
+    let today = new Date(locTime);
     let hour = today.getHours();
-    //hour = 4;
-    
     let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-
     
     let result = {label:[], data:[]};
     url = "http://api.weatherapi.com/v1/history.json?key=9035794a7a4444e99da32445220105&q=";
@@ -115,7 +111,6 @@ const weatherHistoryP10h = async function(locName, res){
     }
     res.send(result);
 }
-
 
 // export function
 module.exports = {weatherRequest, locationsWIthWeather, locations, searchLocations, weatherHistoryP5d, weatherHistoryP10h};
