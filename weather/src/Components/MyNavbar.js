@@ -16,6 +16,7 @@ import Logout from './Logout'
 import Table from './Table';
 import MapGoogle from './MapGoogle';
 import TableSearch from './TableSearch';
+import SearchResult from './SearchResult';
 import DisplayWeather from './DisplayWeather';
 import Favourites from './Favourites';
 import Home from "./Home";
@@ -77,7 +78,7 @@ export default class NavbarComp extends Component {
 
     render() {
         const {currentUser} = this.state;
-        if (currentUser == undefined) {
+        if (currentUser != undefined) {
             return (
 
                 <Router>
@@ -161,6 +162,10 @@ export default class NavbarComp extends Component {
                         <Route exact path="/table" element={<Table/>}/>
 
                         <Route exact path="/locations_search" element={<TableSearch/>}/>
+
+                        <Route exact path="/locations_search/locName/:key" element={<SearchResult/>}/>
+
+                        <Route exact path="/locations_search/:field/:key1/:key2" element={<SearchResult/>}/>
 
                         <Route exact path="/mapgoogle" element={<MapGoogle/>}/>
 

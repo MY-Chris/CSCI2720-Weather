@@ -6,11 +6,21 @@ export class MapGoogle extends Component {
       super(props);
   
       this.state = {
-        stores: [
-          {"locName":"London","latitude":51.52,"longitude":-0.11},
-          {"locName":"Hong Kong","latitude":22.28,"longitude":114.15}
-        ]
-      }
+        stores: []
+      };
+      
+    }
+
+    componentDidMount() {
+      (async () => {
+        const data = await fetch(
+          "http://localhost:3001/locations"
+        )
+        .then((res) => res.json())
+        .then((data) => data);
+        console.log(data);
+        this.setState({stores: data});
+      })();
     }
   
     displayMarkers = () => {
@@ -27,7 +37,7 @@ export class MapGoogle extends Component {
       return (
           <Map
             google={this.props.google}
-            zoom={3}
+            zoom={2}
             style={{
               width: '100%',
               height: '100%',

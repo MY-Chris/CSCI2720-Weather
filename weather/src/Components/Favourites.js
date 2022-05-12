@@ -9,9 +9,24 @@ export default class Favourites extends Component {
         this.state = {favourites: ['London', 'Hong Kong']};
       }
 
+      componentDidMount() {
+        (async () => {
+          const data = await fetch(
+            "http://localhost:3001/users/" + "627be65d731afd1b3293a027" + "/favorites"
+          )
+          .then(res => res.json())
+        .then(data => data);
+          console.log(data);
+          this.setState({favourites: data});
+        })();
+      }
+
 
     render() {
         return (
+            <div className="table_container">
+            <br></br>
+            <h3>My Favourites</h3>
             <table className="table">
                 <thead>
                 <tr>
@@ -43,6 +58,7 @@ export default class Favourites extends Component {
                 })}
             </tbody>
             </table>
+            </div>
         )
     }
 }

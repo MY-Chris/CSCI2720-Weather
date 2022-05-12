@@ -7,13 +7,14 @@ import SearchResult from "./SearchResult";
 export default class TableSearch extends Component {
     constructor(props) {
       super(props);
-      this.state = {value: '', value2: '', field: "", tableData: mockdata, resData: []};
+      this.state = {value: '', value2: '', field: "", tableData: [], resData: []};
   
       this.handleChange = this.handleChange.bind(this);
       this.handleChange2 = this.handleChange2.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
-  
+
+
     handleChange(event) {
       this.setState({value: event.target.value});
       console.log(this.state.value);
@@ -31,19 +32,38 @@ export default class TableSearch extends Component {
   
     handleSubmit(e) {
       //alert('A name was submitted: ' + this.state.tableData[0]['gender']);
-      for(var i = 0; i < this.state.tableData.length; i++){
-        if(this.state.tableData[i][this.state.field] == this.state.value){
-            //console.log(this.state.tableData[i]);
-            this.state.resData.push(this.state.tableData[i]);
-        }
-      };
-      //alert('A name was submitted: ' + this.state.resData);
-      //console.log(this.state.value2);
-      //event.preventDefault();
       if(this.state.field == ""){
         window.alert("Please choose a field!")
       }
-      
+      else if(this.state.field == "city"){
+        (async () => {
+          const data = await fetch(
+            "http://localhost:3001/locations_search/locName/" + this.state.value
+          )
+          .then((res) => res.json())
+          .then((data) => data);
+          console.log(data);
+          this.setState({resData: data});
+        })();
+        console.log(this.state.resData);
+        //alert('A name was submitted: ' + this.state.resData);
+        //console.log(this.state.value2);
+        //event.preventDefault();
+        //window.location.pathname = "/locations_search/locName/" + this.state.value;
+        document.getElementById("new-comment").value = <SearchResult resultData={this.state.resData} />;
+      }
+      else{
+        (async () => {
+          const data = await fetch(
+            "http://localhost:3001/locations_search/" + this.state.field + "/" + this.state.value + "/" + this.state.value2
+          )
+          .then((res) => res.json())
+          .then((data) => data);
+          console.log(data);
+          this.setState({resData: data});
+        })();
+        console.log(this.state.resData);
+      }
     }
 
     findResult(e){
@@ -102,8 +122,8 @@ export default class TableSearch extends Component {
             </div>
           
         </form>
+        <div id="searchres"></div>
         
-        <SearchResult resultData={this.state.resData} />
         </div>
       );
     }

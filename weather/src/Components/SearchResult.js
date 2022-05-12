@@ -4,7 +4,7 @@ export default class SearchResult extends Component {
   constructor(props) {
     super(props);
     this.state = { tableData: this.props.resultData, columns: [
-      { label: "City Name", accessor: "cityname", sortable: true },
+      { label: "City Name", accessor: "locName", sortable: true },
       { label: "Latitude", accessor: "latitude", sortable: true },
       { label: "Longitude", accessor: "longitude", sortable: true },
     ],
@@ -97,10 +97,21 @@ export default class SearchResult extends Component {
         <tbody>
         {this.state.tableData.map((data) => {
           return (
-            <tr key={data.id}>
+            <tr key={data._id}>
               {this.state.columns.map(({ accessor }) => {
-                const tData = data[accessor] ? data[accessor] : "——";
-                return <td key={accessor}>{tData}</td>;
+                console.log(accessor);
+                if(accessor == "locName"){
+                  const tData = data[accessor];
+                  return (<td key={accessor}>
+                            <a href = {`http://localhost:3000/info/${data[accessor]}`}>
+                              {tData}
+                            </a>
+                          </td>)
+                }
+                else{
+                  const tData = data[accessor];
+                  return <td key={accessor}>{tData}</td>
+                }
               })}
             </tr>
           );

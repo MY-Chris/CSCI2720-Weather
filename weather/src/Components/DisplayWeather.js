@@ -138,7 +138,8 @@ export class DisplayWeather extends Component{
     ],
   },
   label1: [],
-  label2: []};
+  label2: [],
+  loc: {}};
   this.setChecked = this.setChecked.bind(this);
   this.handleFavourite = this.handleFavourite.bind(this);
   }
@@ -174,6 +175,14 @@ export class DisplayWeather extends Component{
       .then((data) => data);
       console.log(data);
       this.setState({data: data.data});
+      let lat = data.data.location.lat;
+      let lon = data.data.location.lon;
+      let loc = {
+        lat: lat,
+        lng: lon
+      }
+      this.setState({loc: loc});
+      console.log(loc);
       this.setState({comments: data.comments});
       this.setState({favourite: data.favourite})
     })();
@@ -321,7 +330,13 @@ export class DisplayWeather extends Component{
   
 
   render(){
-
+    let clat = this.state.data.location.lat;
+    let clon = this.state.data.location.lon;
+    const mloc = {
+      lat: clat,
+      lng: clon
+    }
+    console.log(mloc);
   return (
     <Container>
     <div>
@@ -431,7 +446,7 @@ export class DisplayWeather extends Component{
                   <td>
                     <span>
                       {this.state.data.current.wind_degree}
-                      ° deg,&nbsp;
+                      °,&nbsp;
                       {this.state.data.current.wind_dir}
                     </span>
                   </td>
@@ -472,7 +487,7 @@ export class DisplayWeather extends Component{
             <i>Please scroll down to see all the comments.&emsp;&emsp;&emsp;</i>
             <div id="comments" className="ScrollStyle"> 
             {this.state.comments.map((data) => {
-              console.log(data);
+              //console.log(data);
               return (
                 <div key={data._id}>
                   <h5>{data.username}</h5>
@@ -519,12 +534,12 @@ export class DisplayWeather extends Component{
       
             <Map
                   google={this.props.google}
-                  zoom={8}
+                  zoom={1}
                   style={{
                     width: '80%',
                     height: '50%',
                   }}
-                  initialCenter={{ lat: this.state.data.location.lat, lng: this.state.data.location.lon}}
+                  initialCenter={mloc}
                 >
                   {this.displayMarkers()}
                 </Map>
