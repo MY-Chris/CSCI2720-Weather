@@ -5,6 +5,8 @@ const fs = require('fs');
 const {ApolloServer, gql} = require('apollo-server-express');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://hkn:csci2720@cluster0.quwtc.mongodb.net/test');
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
 const cors = require('cors');
 const res = require('express/lib/response');
 app.use(cors());
@@ -26,20 +28,28 @@ app.use(morgan(':remote-addr - [:date[clf]] ":method :url HTTP/:http-version" ":
 //Add Routes here
 
 //User feature 4
-app.get('/locations/:locName', (req, res) => {
-    myfunctions2.showLocationDetail(req.params.locName, res);
+app.get('/locations/:locName/users/:userId', (req, res) => {
+    myfunctions2.showLocationDetail(req.params.locName, req.params.userId, res);
 });
 app.put('/locations/:locName/users/:userId', (req, res) => {
     myfunctions2.addComment(req.body['content'], req.params.locName, req.params.userId);
 });
 
 //User feature 5
-app.put('/users/:userId/favorites', (req, res) => {
-    myfunctions2.addFavoriteLocation(req.body['locName'], req.params.userId);
-});
+app.get('/locations/:locName/users/:userId/fav/:status', (req, res) => {
+    if(req.params.status === '1') {
+        myfunctions2.removeFavoriteLocation(req.params.locName, req.params.userId);
+        res.send("removed!");
+    }
+    else {
+        myfunctions2.addFavoriteLocation(req.params.locName, req.params.userId);
+        res.send("added!");
+    }
+})
 app.get('/users/:userId/favorites', (req, res) => {
     myfunctions2.listAllLocations(req.params.userId, res);
 });
+
 
 // User feature 2, send all locations 
 app.get('/locations', (req, res) => {
@@ -68,7 +78,6 @@ app.get('/history/past5days/:locName', (req, res) => {
 app.get('/history/past10hours/:locName', (req, res) => {
     myfunctions1.weatherHistoryP10h(req.params.locName, res);
 });
-
 
 
 //GraphQL

@@ -7,11 +7,14 @@ import MyNavbar from './Components/MyNavbar';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" >
 
         <MyNavbar/>
 
+
+
     </div>
+
   );
 }
 
