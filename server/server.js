@@ -77,12 +77,13 @@ app.get('/locations_search/:field/:key1/:key2', (req, res) => {
     myfunctions1.searchLocations(res, req.params.field, req.params.key1, req.params.key2);
 });
 
-app.get('/history/past5days/:locName', (req, res) => {
-    myfunctions1.weatherHistoryP5d(req.params.locName, res);
+//"2022-05-12 16:06"
+app.get('/history/past5days/:locName/:locTime', (req, res) => {
+    myfunctions1.weatherHistoryP5d(req.params.locName, req.params.locTime, res);
 });
 
-app.get('/history/past10hours/:locName', (req, res) => {
-    myfunctions1.weatherHistoryP10h(req.params.locName, res);
+app.get('/history/past10hours/:locName/:locTime', (req, res) => {
+    myfunctions1.weatherHistoryP10h(req.params.locName, req.params.locTime, res);
 });
 
 
