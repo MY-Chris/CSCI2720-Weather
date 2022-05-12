@@ -38,8 +38,21 @@ const locations = async function(res){
     res.send(locations);
 }
 
+const searchLocations = async function(res, field, key1, key2 = undefined){
+    let locations = [];
+    if (key2 == undefined){
+        // add partial search
+        locations = await schemas.Location.find({locName: key1}).select('-_id locName latitude longitude').lean().exec();  
+    }else{
+        locations = await schemas.Location.find({[field]: { $gte: key1, $lte: key2 } }).select('-_id locName latitude longitude').lean().exec();
+    }
+    console.log("Locations: ");
+    console.log( locations);
+    res.send(locations);
+}
+
 // export function
-module.exports = {locations_weather, locations};
+module.exports = {locationsWIthWeather, locations, searchLocations};
 
 
 

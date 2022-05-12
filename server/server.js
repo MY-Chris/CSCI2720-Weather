@@ -40,12 +40,27 @@ app.get('/users/:userId/favorites', (req, res) => {
     myfunctions.listAllLocations(req.params.userId, res);
 });
 
+// User feature 2, send all locations 
 app.get('/locations', (req, res) => {
     myfunctions1.locations( res);
 });
+
+// User feature 1, send all locations with weather info
 app.get('/locations_weather', (req, res) => {
     myfunctions1.locationsWIthWeather( res);
 });
+
+// User feature 3, search by locName, send all locations whose locName contain key
+app.get('/locations_search/locName/:key', (req, res) => {
+    myfunctions1.searchLocations(res, "locName", req.params.key);
+});
+
+// User feature 3, search by other fields, send all locations whose key1 <= field <= key2
+app.get('/locations_search/:field/:key1/:key2', (req, res) => {
+    myfunctions1.searchLocations(res, req.params.field, req.params.key1, req.params.key2);
+});
+
+
 
 const server = app.listen(3000);
 
