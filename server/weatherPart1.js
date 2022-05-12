@@ -69,7 +69,7 @@ const weatherHistory = async function(res){
 }
 
 // export function
-module.exports = {locationsWIthWeather, locations, searchLocations, weatherHistory};
+module.exports = {weatherRequest, locationsWIthWeather, locations, searchLocations, weatherHistory};
 
 
 

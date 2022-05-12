@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const fs = require('fs');
+const {ApolloServer, gql} = require('apollo-server-express');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://hkn:csci2720@cluster0.quwtc.mongodb.net/test');
 const cors = require('cors');
@@ -11,7 +12,7 @@ const axios = require('axios');
 
 const schemas = require('./schema.js');
 const myfunctions1 = require('./weatherPart1.js');
-const myfunctions = require('./weatherPart2.js');
+const myfunctions2 = require('./weatherPart2.js');
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Connection error:'));
@@ -26,18 +27,18 @@ app.use(morgan(':remote-addr - [:date[clf]] ":method :url HTTP/:http-version" ":
 
 //User feature 4
 app.get('/locations/:locName', (req, res) => {
-    myfunctions.showLocationDetail(req.params.locName, res);
+    myfunctions2.showLocationDetail(req.params.locName, res);
 });
 app.put('/locations/:locName/users/:userId', (req, res) => {
-    myfunctions.addComment(req.body['content'], req.params.locName, req.params.userId);
+    myfunctions2.addComment(req.body['content'], req.params.locName, req.params.userId);
 });
 
 //User feature 5
 app.put('/users/:userId/favorites', (req, res) => {
-    myfunctions.addFavoriteLocation(req.body['locName'], req.params.userId);
+    myfunctions2.addFavoriteLocation(req.body['locName'], req.params.userId);
 });
 app.get('/users/:userId/favorites', (req, res) => {
-    myfunctions.listAllLocations(req.params.userId, res);
+    myfunctions2.listAllLocations(req.params.userId, res);
 });
 
 // User feature 2, send all locations 
@@ -61,6 +62,70 @@ app.get('/locations_search/:field/:key1/:key2', (req, res) => {
 });
 
 
+
+
+//GraphQL
+const typeDefs = gql`
+    type Location {
+        locName: String!
+        latitude: Float!
+        longitude: Float!
+        comments: [Comment]
+        temp_c: Float
+        wind_kph: Float
+        wind_dir: String
+        humidity: Float
+        precip_mm: Float
+        vis_km: Float
+    }
+    type Comment {
+        commentUser: String!
+        commentLoc: String!
+        content: String
+    }
+    type Query {
+        location(locName: String!): Location
+        locations: [Location]
+    }
+`;
+
+const resolvers = {
+    Query: {
+        location: async (parent, {locName}) => {
+            const loc = await schemas.Location.findOne({locName: locName}).lean().populate('comments').exec();
+            url = "http://api.weatherapi.com/v1/current.json?key=9035794a7a4444e99da32445220105&q=";
+            let weather_info = await myfunctions1.weatherRequest(url + loc.locName);
+            loc.temp_c = weather_info.current.temp_c;
+            loc.wind_kph = weather_info.current.wind_kph;
+            loc.wind_dir = weather_info.current.wind_dir;
+            loc.humidity = weather_info.current.humidity;
+            loc.precip_mm = weather_info.current.precip_mm;
+            loc.vis_km = weather_info.current.vis_km;
+            console.log(loc);
+            return loc;
+        },
+        locations: async () => {
+            const locs = await schemas.Location.find().lean().populate('comments').exec();
+            url = "http://api.weatherapi.com/v1/current.json?key=9035794a7a4444e99da32445220105&q=";
+            for (loc of locs) {
+                let weather_info = await myfunctions1.weatherRequest(url + loc.locName);
+                loc.temp_c = weather_info.current.temp_c;
+                loc.wind_kph = weather_info.current.wind_kph;
+                loc.wind_dir = weather_info.current.wind_dir;
+                loc.humidity = weather_info.current.humidity;
+                loc.precip_mm = weather_info.current.precip_mm;
+                loc.vis_km = weather_info.current.vis_km;
+            }
+            console.log(locs);
+            return locs;
+        }
+    }
+}
+
+const s = new ApolloServer({typeDefs, resolvers});
+s.start().then(res => {
+    s.applyMiddleware({app});
+});
 
 const server = app.listen(3000);
 
