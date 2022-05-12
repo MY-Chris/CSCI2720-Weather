@@ -12,7 +12,7 @@ db.once('open', function () {
 const {Schema} = mongoose;
 
 const UserSchema = mongoose.Schema({
-    username: {type: String, required: true},
+    username: {type: String, required: true, unique: true},
     password: {type: String, required: true},
     searchHistory: [{type: String}],
     favoriteLocs: [{type: String}],
