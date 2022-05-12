@@ -9,7 +9,7 @@ export default class Table extends Component {
       { label: "Email", accessor: "email", sortable: false },
       { label: "Gender", accessor: "gender", sortable: true },
       { label: "Age", accessor: "age", sortable: true },
-      { label: "Start date", accessor: "start_date", sortable: true },
+      { label: "Favourite", accessor: "favourite", sortable: true },
     ],
     sortField: "", order: "asc"};
   }
@@ -107,7 +107,15 @@ export default class Table extends Component {
             <tr key={data.id}>
               {this.state.columns.map(({ accessor }) => {
                 if(accessor == "full_name"){
-                  const tData = data[accessor] ? data[accessor] : "——";
+                  const tData = data[accessor];
+                  return (<td key={accessor}>
+                            <a href = {`http://localhost:3000/info/${data[accessor]}`}>
+                              {tData}
+                            </a>
+                          </td>)
+                }
+                else if(accessor == "favoutite"){
+                  const tData = data[accessor];
                   return (<td key={accessor}>
                             <a href = {`http://localhost:3000/info/${data[accessor]}`}>
                               {tData}
@@ -115,7 +123,7 @@ export default class Table extends Component {
                           </td>)
                 }
                 else{
-                  const tData = data[accessor] ? data[accessor] : "——";
+                  const tData = data[accessor];
                   return <td key={accessor}>{tData}</td>
                 }
               })}

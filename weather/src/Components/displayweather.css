@@ -1,3 +1,12 @@
+button {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
+
 .weather {
   margin-top: 20px;
   border: 3px dashed grey;
@@ -17,8 +26,8 @@
 }
 
 .displayweather .maincard {
-  width: 500px;
-  height: 260px;
+  width: 540px;
+  height: 256px;
   margin-top: 20px;
   margin-bottom: 0px;
   align-self: left;
@@ -46,7 +55,7 @@
 
 .displayweather .maincard .cardnote {
   position: absolute;
-  left: 230px;
+  left: 280px;
   color: grey;
   margin-top: 12px;
   font-size: 0.9rem;
@@ -118,3 +127,4 @@ td {
   max-height: 150px;
   overflow-y: scroll;
 }
+
