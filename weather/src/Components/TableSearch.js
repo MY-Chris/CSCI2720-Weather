@@ -7,7 +7,12 @@ import SearchResult from "./SearchResult";
 export default class TableSearch extends Component {
     constructor(props) {
       super(props);
-      this.state = {value: '', value2: '', field: "", tableData: [], resData: []};
+      this.state = {value: '', value2: '', field: "", tableData: [], resData: [],
+      columns: [
+        { label: "City Name", accessor: "locName", sortable: true },
+        { label: "Latitude", accessor: "latitude", sortable: true },
+        { label: "Longitude", accessor: "longitude", sortable: true },
+      ],};
   
       this.handleChange = this.handleChange.bind(this);
       this.handleChange2 = this.handleChange2.bind(this);
@@ -49,8 +54,7 @@ export default class TableSearch extends Component {
         //alert('A name was submitted: ' + this.state.resData);
         //console.log(this.state.value2);
         //event.preventDefault();
-        //window.location.pathname = "/locations_search/locName/" + this.state.value;
-        document.getElementById("new-comment").value = <SearchResult resultData={this.state.resData} />;
+        window.location.pathname = "/locations_search/locName/" + this.state.value;
       }
       else{
         (async () => {
@@ -122,8 +126,69 @@ export default class TableSearch extends Component {
             </div>
           
         </form>
-        <div id="searchres"></div>
         
+        <div className="table_container">
+      <br></br>
+      <h3>Search Result</h3>
+      <small>
+        Please click the up / down arrow at a field head to sort the table with 
+        that field in ascending / descending order.
+      </small>
+      <table className="table">
+        <caption>
+          Column headers are
+          sortable.
+        </caption>
+
+        <thead>
+          <tr>
+            {this.state.columns.map(({ label, accessor, sortable }) => {
+              const cl = sortable
+                ? this.state.sortField && this.state.sortField === accessor && this.state.order === "asc"
+                  ? "up"
+                  : this.state.sortField && this.state.sortField === accessor && this.state.order === "desc"
+                  ? "down"
+                  : "default"
+                : "";
+              return (
+                <th
+                  key={accessor}
+                  onClick={sortable ? () => this.handleSortingChange(accessor) : null}
+                  className={cl}
+                >
+                  {label}
+                </th>
+              );
+            })}
+          </tr>
+        </thead>
+        
+        <tbody>
+        {this.state.tableData.map((data) => {
+          return (
+            <tr key={data._id}>
+              {this.state.columns.map(({ accessor }) => {
+                console.log(accessor);
+                if(accessor == "locName"){
+                  const tData = data[accessor];
+                  return (<td key={accessor}>
+                            <a href = {`http://localhost:3000/info/${data[accessor]}`}>
+                              {tData}
+                            </a>
+                          </td>)
+                }
+                else{
+                  const tData = data[accessor];
+                  return <td key={accessor}>{tData}</td>
+                }
+              })}
+            </tr>
+          );
+        })}
+    </tbody>
+    </table>
+    </div>
+
         </div>
       );
     }
