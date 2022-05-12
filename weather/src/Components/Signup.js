@@ -118,20 +118,20 @@ export default class Register extends Component {
     };
 
     const vusername = value => {
-      if (value.length < 3 || value.length > 20) {
+      if (value.length < 4 || value.length > 20) {
         return (
             <div className="alert alert-danger" role="alert">
-              The username must be between 3 and 20 characters.
+              The username must be between 4 and 20 characters.
             </div>
         );
       }
     };
 
     const vpassword = value => {
-      if (value.length < 6 || value.length > 40) {
+      if (value.length < 4 || value.length > 20) {
         return (
             <div className="alert alert-danger" role="alert">
-              The password must be between 6 and 40 characters.
+              The password must be between 4 and 20 characters.
             </div>
         );
       }

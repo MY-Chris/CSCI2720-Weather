@@ -6,6 +6,7 @@ import {
     Route,
     Link,
     Navigate,
+    useLocation,
 } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -17,7 +18,7 @@ import MapGoogle from './MapGoogle';
 import TableSearch from './TableSearch';
 import DisplayWeather from './DisplayWeather';
 import Favourites from './Favourites';
-
+import Home from "./Home";
 import EventBus from "../common/EventBus";
 import AuthService from "../services/auth.service";
 
@@ -26,6 +27,7 @@ import AuthService from "../services/auth.service";
 
 
 export default class NavbarComp extends Component {
+
 
     constructor(props) {
         super(props);
@@ -60,6 +62,16 @@ export default class NavbarComp extends Component {
             currentUser: undefined,
         });
     }
+    NoMatch() {
+        let location = useLocation();
+        return (
+            <div>
+                <h3 style={{color:"white"}}>
+                    No match for <code>{location.pathname}</code>
+                </h3>
+            </div>
+        );
+    }
 
 
 
@@ -71,7 +83,7 @@ export default class NavbarComp extends Component {
                 <Router>
                     <div>
                         <Navbar bg="dark" variant={"dark"} expand="lg">
-                            <Navbar.Brand href="#">&emsp;Weathering With Me</Navbar.Brand>
+                            <Navbar.Brand href="/">&emsp;Weathering With Me</Navbar.Brand>
                             <Navbar.Toggle aria-controls="navbarScroll"/>
                             <Navbar.Collapse id="navbarScroll">
                                 <Nav
@@ -93,9 +105,10 @@ export default class NavbarComp extends Component {
                     </div>
                     <div>
                         <Routes>
+                            <Route exact path="/" element={<Home/>}/>
                             <Route exact path="/login" element={<Login/>}/>
-
                             <Route exact path="/signup" element={<Signup/>}/>
+                            <Route path="*" element={<this.NoMatch/>}/>
 
 
 
@@ -127,6 +140,7 @@ export default class NavbarComp extends Component {
                                 <Nav.Link as={Link} to="/locations_search">Search</Nav.Link>
                                 <Nav.Link as={Link} to="/mapgoogle">Map</Nav.Link>
                                 <Nav.Link as={Link} to="/favourites">Favourites</Nav.Link>
+                                <Nav.Link as={Link} to="/logout">Log Out</Nav.Link>
 
 
                             </Nav>
@@ -136,9 +150,13 @@ export default class NavbarComp extends Component {
                 </div>
                 <div>
                     <Routes>
+                        <Route exact path="/" element={<Home/>}/>
+
                         <Route exact path="/login" element={<Login/>}/>
 
                         <Route exact path="/signup" element={<Signup/>}/>
+
+                        <Route exact path="/logout" element={<Logout/>}/>
 
                         <Route exact path="/table" element={<Table/>}/>
 
@@ -149,6 +167,7 @@ export default class NavbarComp extends Component {
                         <Route exact path="/info/:city" element={<DisplayWeather/>}/>
 
                         <Route exact path="/favourites" element={<Favourites/>}/>
+                        <Route path="*" element={<this.NoMatch/>}/>
 
 
                     </Routes>
