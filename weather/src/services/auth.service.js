@@ -1,5 +1,6 @@
 import axios from "axios";
-
+import bcrypt from 'bcryptjs'
+const salt = '$2a$10$CwTycUXWue0Thq9StjUM0u' //bcrypt.genSaltSync(10)
 const API_URL = "http://localhost:3001/auth/";
 
 function hash(s) {
@@ -17,7 +18,8 @@ class AuthService {
 
 
   login(username, password) {
-    password = hash(password);
+    password = bcrypt.hashSync(password,salt);
+    // password = hash(password);
     return axios
       .post(API_URL + "signin", {
         username,
@@ -32,11 +34,12 @@ class AuthService {
   }
 
   logout() {
-    localStorage.removeItem("user");
+    axios.get(API_URL + "logout");
+    sessionStorage.removeItem("user");
   }
 
   register(username, password) {
-    password = hash(password);
+    password = bcrypt.hashSync(password,salt);
     return axios.post(API_URL + "signup", {
       username,
       password
@@ -44,10 +47,10 @@ class AuthService {
   }
 
   getCurrentUser() {
-    if (localStorage.getItem('user') == "undefined")
+    if (sessionStorage.getItem('user') == "undefined")
       return undefined
     else
-      return JSON.parse(localStorage.getItem('user'));
+      return JSON.parse(sessionStorage.getItem('user'));
   }
 }
 

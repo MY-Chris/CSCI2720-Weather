@@ -4,13 +4,16 @@ import AuthService from "../services/auth.service";
 
 export default class Logout extends Component {
     render() {
-        // localStorage.removeItem("user");
-        // this.setState({
-        //     currentUser: undefined,
+        AuthService.logout();
+        window.setTimeout(function(){
+
+            window.location.href = "/";
+
+        }, 3000);
         // });
         return (
             <div>
-                <h2>Logout Successfully</h2>
+                <h2 style={{color:"white"}}>Logout Successfully</h2>
             </div>
         )
     }
