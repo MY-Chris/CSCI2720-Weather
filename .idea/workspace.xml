@@ -2,14 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b50e50cc-aacb-41f5-ba35-026f49e1d715" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/weather/src/Components/Home.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/weather/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weather/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weather/src/Components/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/Components/Login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/weather/src/Components/Logout.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/Components/Logout.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/weather/src/Components/MyNavbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/Components/MyNavbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weather/src/Components/Signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/Components/Signup.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +59,11 @@
       <workItem from="1652266169686" duration="2656000" />
       <workItem from="1652293135818" duration="8749000" />
       <workItem from="1652302020543" duration="1491000" />
-      <workItem from="1652357912279" duration="3031000" />
+      <workItem from="1652357912279" duration="3609000" />
+      <workItem from="1652382622526" duration="123000" />
+      <workItem from="1652382857083" duration="601000" />
+      <workItem from="1652428900057" duration="4333000" />
+      <workItem from="1652433453272" duration="3986000" />
     </task>
     <servers />
   </component>

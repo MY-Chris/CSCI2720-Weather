@@ -42,42 +42,6 @@ export default class SearchResult extends Component {
       this.setState({field: e.target.value})
   }
 
-  handleSubmit(e) {
-    //alert('A name was submitted: ' + this.state.tableData[0]['gender']);
-    if(this.state.field == ""){
-      window.alert("Please choose a field!")
-    }
-    else if(this.state.field == "city"){
-      (async () => {
-        const data = await fetch(
-          "http://localhost:3001/locations_search/locName/" + this.state.value
-        )
-        .then((res) => res.json())
-        .then((data) => data);
-        console.log(data);
-        this.setState({resData: data});
-      })();
-      console.log(this.state.resData);
-      //alert('A name was submitted: ' + this.state.resData);
-      console.log(this.state.value);
-      //event.preventDefault();
-      window.location.pathname = "/locations_search/locName/" + this.state.value;
-      //document.getElementById("new-comment").value = <SearchResult resultData={this.state.resData} />;
-    }
-    else{
-      (async () => {
-        const data = await fetch(
-          "http://localhost:3001/locations_search/" + this.state.field + "/" + this.state.value + "/" + this.state.value2
-        )
-        .then((res) => res.json())
-        .then((data) => data);
-        console.log(data);
-        this.setState({resData: data});
-      })();
-      console.log(this.state.resData);
-    }
-  }
-
   handleSorting = (sortField, sortOrder) => {
     if (sortField) {
       const sorted = [...this.state.tableData].sort((a, b) => {
@@ -212,7 +176,7 @@ export default class SearchResult extends Component {
         Please click the up / down arrow at a field head to sort the table with 
         that field in ascending / descending order.
       </small>
-      <table className="table">
+      <table className="table" id="table">
         <caption>
           Column headers are
           sortable.
@@ -244,7 +208,7 @@ export default class SearchResult extends Component {
         <tbody>
         {this.state.tableData.map((data) => {
           return (
-            <tr key={data._id}>
+            <tr key={data.locName}>
               {this.state.columns.map(({ accessor }) => {
                 //console.log(accessor);
                 if(accessor == "locName"){

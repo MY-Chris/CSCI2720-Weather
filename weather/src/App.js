@@ -7,7 +7,7 @@ import MyNavbar from './Components/MyNavbar';
 
 function App() {
   return (
-    <div className="App" >
+    <div className="Appu dark" id="App">
 
         <MyNavbar/>
 

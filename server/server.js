@@ -1,5 +1,13 @@
 const express = require('express');
 const app = express();
+const session = require('express-session');
+app.use(session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+}));
+
+
 const morgan = require('morgan');
 const fs = require('fs');
 const {ApolloServer, gql} = require('apollo-server-express');
@@ -33,7 +41,52 @@ app.use(morgan('myformat', {"stream": accessLogStream}));
 
 
 //Add Routes here
+// User login
+app.post('/auth/signup', (req, res) => {
 
+    schemas.User.findOne({ username: req.body['username'] }, (err, e) => {
+            if (err)
+                res.status(400).send(err);
+            else {
+                if(e!=null)
+                {
+                    res.status(400).send({message: "Account already exists!"});
+
+                }
+                else{
+                    schemas.User.create({
+                        username: req.body['username'],
+                        password: req.body['password'],
+                    }, (err, e) => {
+                        if (err)
+                            res.status(400).send({message: err});
+                        else
+                            res.send({message:"Successfully signed up."});
+                    });
+                }
+            }
+        });
+});
+// User sign up
+app.post('/auth/signin', (req, res) => {
+
+    schemas.User.findOne({ username: req.body['username'] }, (err, e) => {
+        if (err)
+            res.status(400).send({message: err});
+        else {
+            if (req.body['password'] == e.password) {
+                req.session.loggedin = true;
+                req.session.username = req.body['username'];
+                res.send({user:req.body['username'],message: "Successfully logged in."});
+            }
+            else
+                res.status(400).send({message: "Incorrect password"});
+        }
+    });
+});
+
+// User logout
+app.get('/logout',(req,res)=> {req.session.destroy((err)=>{})});
 //User feature 4
 app.get('/locations/:locName/users/:userId', (req, res) => {
     myfunctions2.showLocationDetail(req.params.locName, req.params.userId, res);

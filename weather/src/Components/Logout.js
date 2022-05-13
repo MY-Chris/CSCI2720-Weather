@@ -1,14 +1,19 @@
 import React, { Component } from 'react'
 import AuthService from "../services/auth.service";
+
+
 export default class Logout extends Component {
     render() {
         AuthService.logout();
-        this.setState({
-            currentUser: undefined,
-        });
+        window.setTimeout(function(){
+
+            window.location.href = "/";
+
+        }, 3000);
+        // });
         return (
             <div>
-                <h2>Logout Successfully</h2>
+                <h2 style={{color:"black"}}>Logout Successfully</h2>
             </div>
         )
     }

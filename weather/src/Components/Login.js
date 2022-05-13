@@ -52,31 +52,39 @@ export default class Login extends Component {
 
     this.form.validateAll();
 
-    // if (this.checkBtn.context._errors.length === 0) {
-    //   AuthService.login(this.state.username, this.state.password).then(
-    //     () => {
-    //       this.props.history.push("/profile");
-    //       window.location.reload();
-    //     },
-    //     error => {
-    //       const resMessage =
-    //         (error.response &&
-    //           error.response.data &&
-    //           error.response.data.message) ||
-    //         error.message ||
-    //         error.toString();
-    //
-    //       this.setState({
-    //         loading: false,
-    //         message: resMessage
-    //       });
-    //     }
-    //   );
-    // } else {
-    //   this.setState({
-    //     loading: false
-    //   });
-    // }
+    if (this.checkBtn.context._errors.length === 0) {
+      AuthService.login(this.state.username, this.state.password).then(
+          response => {
+            window.setTimeout(function(){
+
+              window.location.href = "/";
+
+            }, 3000);
+            sessionStorage.setItem("user", JSON.stringify(response.data.user));
+            this.setState({
+              message: response.data.message,
+              successful: true
+            });
+          }).catch(
+        error => {
+          const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+
+          this.setState({
+            loading: false,
+            message: resMessage
+          });
+        }
+      );
+    } else {
+      this.setState({
+        loading: false
+      });
+    }
   }
 
   render() {
@@ -132,11 +140,18 @@ export default class Login extends Component {
             </div>
 
             {this.state.message && (
-              <div className="form-group">
-                <div className="alert alert-danger" role="alert">
-                  {this.state.message}
+                <div className="form-group">
+                  <div
+                      className={
+                        this.state.successful
+                            ? "alert alert-success"
+                            : "alert alert-danger"
+                      }
+                      role="alert"
+                  >
+                    {this.state.message}
+                  </div>
                 </div>
-              </div>
             )}
             <CheckButton
               style={{ display: "none" }}

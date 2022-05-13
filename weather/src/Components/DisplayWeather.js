@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./displayweather.css";
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import { ToggleButton, Container, Row, Col, Table } from 'react-bootstrap';
-import unfavourite from '../images/unfavourite.png'
+import unfavourite from '../images/unfav.png'
 import favourite from '../images/favourite.png'
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
 
@@ -326,6 +326,8 @@ export class DisplayWeather extends Component{
         .catch((error) => {
           console.error('Error:', error);
         });
+
+        window.location.reload(false);
   }
   
 
@@ -339,13 +341,13 @@ export class DisplayWeather extends Component{
     console.log(mloc);
   return (
     <Container>
-    <div>
+    <div className="displayweather" id="displayweather">
     <Row>
     <Col>
-    <div className="displayweather">
+    <div>
       
         <React.Fragment>
-          <div className="maincard">
+          <div className="maincard maincardbg">
             <span className="cardtitle">
               Weather in {this.state.data.location.name} , {this.state.data.location.country}
               &emsp;&emsp;&emsp;
@@ -481,11 +483,11 @@ export class DisplayWeather extends Component{
     </div>
     </Col>
     <Col>
-    <div className="comments">
-    <section id="commentsSec" className="grad1">
+    <div className="comments dark" id="comments">
+    <div className="grad1 maincardbg">
             <h3 id="heading4" className="text-center" style={{marginTop: 5}}>Comments</h3>
             <i>Please scroll down to see all the comments.&emsp;&emsp;&emsp;</i>
-            <div id="comments" className="ScrollStyle"> 
+            <div className="ScrollStyle"> 
             {this.state.comments.map((data) => {
               //console.log(data);
               return (
@@ -507,7 +509,7 @@ export class DisplayWeather extends Component{
             </div>
             <button id="addcomment" type="button" className="btn btn-primary" onClick={this.processform} style={{marginBottom: 10}}>Add comment</button>
             </form>
-          </section>
+          </div>
             </div>
     </Col>
     </Row>
