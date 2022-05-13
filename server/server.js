@@ -17,14 +17,11 @@ const fs = require('fs');
 const {ApolloServer, gql} = require('apollo-server-express');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://hkn:csci2720@cluster0.quwtc.mongodb.net/test');
-const bodyParser = require('body-parser');
-app.use(bodyParser.json());
 const cors = require('cors');
 const res = require('express/lib/response');
 app.use(cors());
 const axios = require('axios');
 const moment = require('moment-timezone');
-app.use(bodyParser.urlencoded({extended: false}));
 
 const schemas = require('./schema.js');
 const myfunctions1 = require('./weatherPart1.js');
@@ -49,15 +46,42 @@ const accessLogStream = fs.createWriteStream(__dirname + '/access.log', {flags: 
 app.use(morgan('myformat', {"stream": accessLogStream}));
 
 AdminBro.registerAdapter(AdminBroMongoose);
+const locale = {
+    translations: {
+        labels: {
+        // change Heading for Login
+        loginWelcome: 'Weather Admin',
+        },
+        messages: {
+            loginWelcome: 'Please login',
+        },
+    },
+};
 const AdminBroOptions = {
     resources: [schemas.User, schemas.Location, schemas.Comment],
     rootPath: '/admin',
+    locale,
+    branding: {
+        companyName: 'Weather',
+        softwareBrothers: false,
+        logo:'',
+    },
 };
 const adminBro = new AdminBro(AdminBroOptions)
-const router = AdminBroExpress.buildRouter(adminBro);
+const router = AdminBroExpress.buildAuthenticatedRouter(adminBro, {
+    authenticate: (username, password) => {
+        if (username === 'admin' && password === 'admin')
+            return true;
+        else
+            return false;
+    },
+    cookiePassword: "CSCI2720weather",
+});
 app.use(adminBro.options.rootPath, router);
 
-
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 //Add Routes here
 // app.get('/to_admin',(req,res)=>{
 //     res.redirect('/admin');
