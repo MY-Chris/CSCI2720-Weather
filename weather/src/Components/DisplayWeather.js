@@ -28,37 +28,30 @@ ChartJS.register(
   Legend
 );
 
-export const options = {
+export const options1 = {
   responsive: true,
   plugins: {
     legend: {
-      position: 'top',
+      position: 'left',
     },
     title: {
       display: true,
-      text: 'Past 10 hours',
+      text: 'Past 10 hours (relative to local time of this city)',
     },
   },
 };
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-
-export const chartdata = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-  datasets: [
-    {
-      label: 'Dataset 1',
-      data: [100, 200, 300, 400, 500, 200, 300],
-      borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
+export const options2 = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: 'left',
     },
-    {
-      label: 'Dataset 2',
-      data: [200, 500, 200, 100, 800, 600, 700],
-      borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
+    title: {
+      display: true,
+      text: 'Past 5 days (relative to local time of this city)',
     },
-  ],
+  },
 };
 
 
@@ -182,6 +175,9 @@ export class DisplayWeather extends Component{
       document.getElementById("displayweather").classList.remove("dark");
       document.getElementById("displayweather").classList.remove("light");
       document.getElementById("displayweather").classList.add(theme);
+      document.getElementById("comments").classList.remove("dark");
+      document.getElementById("comments").classList.remove("light");
+      document.getElementById("comments").classList.add(theme);
       document.getElementById("App").classList.remove("dark");
       document.getElementById("App").classList.remove("light");
       document.getElementById("App").classList.add(theme);
@@ -221,29 +217,31 @@ console.log("http://localhost:3001/locations/" + cityinurl + "/users/" + userid)
       this.setState({label2: data.label});
     console.log(data.label);
       let label2 = data.label;
-    let generatedata2 = {
-      labels: label2,
-      datasets: [
-        {
-          label: 'Temperature (°C)',
-          data: data.data.temp_c,
-          borderColor: 'rgb(255, 99, 132)',
-          backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        },
-        {
-          label: 'Humidity (%)',
-          data: data.data.humidity,
-          borderColor: 'rgb(53, 162, 235)',
-          backgroundColor: 'rgba(53, 162, 235, 0.5)',
-        },
-        {
-          label: 'Visibility (km)',
-          data: data.data.vis_km,
-          borderColor: 'rgb(53, 9, 123)',
-          backgroundColor: 'rgba(53, 9, 123, 0.5)',
-        },
-      ],
-    };
+
+      let generatedata2 = {
+          labels: label2,
+          datasets: [
+            {
+              label: 'Temperature (°C)',
+              data: data.data.temp_c,
+              borderColor: 'rgb(253, 138, 161)',
+              backgroundColor: 'rgba(253, 138, 161, 0.5)',
+            },
+            {
+              label: 'Visibility (km)',
+              data: data.data.vis_km,
+              borderColor: 'rgb(53, 162, 235)',
+              backgroundColor: 'rgba(53, 162, 235, 0.5)',
+            },
+            {
+              label: 'Wind (km/h)',
+              data: data.data.wind_kph,
+              borderColor: 'rgb(240, 213, 77)',
+              backgroundColor: 'rgba(240, 213, 77, 0.5)',
+            },
+          ],
+        };
+      
     console.log(generatedata2);
     this.setState({data2: generatedata2});
     console.log(this.state.data2);
@@ -266,20 +264,20 @@ console.log("http://localhost:3001/locations/" + cityinurl + "/users/" + userid)
         {
           label: 'Temperature (°C)',
           data: data.data.temp_c,
-          borderColor: 'rgb(255, 99, 132)',
-          backgroundColor: 'rgba(255, 99, 132, 0.5)',
+          borderColor: 'rgb(253, 138, 161)',
+          backgroundColor: 'rgba(253, 138, 161, 0.5)',
         },
         {
-          label: 'Humidity (%)',
-          data: data.data.humidity,
+          label: 'Visibility (km)',
+          data: data.data.vis_km,
           borderColor: 'rgb(53, 162, 235)',
           backgroundColor: 'rgba(53, 162, 235, 0.5)',
         },
         {
           label: 'Wind (km/h)',
           data: data.data.wind_kph,
-          borderColor: 'rgb(53, 9, 123)',
-          backgroundColor: 'rgba(53, 9, 123, 0.5)',
+          borderColor: 'rgb(240, 213, 77)',
+          backgroundColor: 'rgba(240, 213, 77, 0.5)',
         },
       ],
     };
@@ -306,14 +304,14 @@ console.log("http://localhost:3001/locations/" + cityinurl + "/users/" + userid)
   handleFavourite(e){
     this.setState({favourite: !this.state.favourite});
     console.log(this.state.favourite);
-    let status = this.state.favourite ? 0 : 1;
+    let status = this.state.favourite ? 1 : 0;
     let cityurl = window.location.pathname;
     let cityinurl = cityurl.substring(cityurl.lastIndexOf('/') + 1);
     //let data = "location=" + cityinurl;
     console.log(cityinurl);
     console.log(status);
     let userid = sessionStorage.getItem('userid').toString().substring(1, 25);
-    fetch('http://localhost:3000/locations/' + cityinurl + "/users/" + userid + "/fav/" + status)
+    fetch('http://localhost:3001/locations/' + cityinurl + "/users/" + userid + "/fav/" + status)
         .then((res) => res.text())
         .then((data) => {
           data.replace(/\n/g, "");
@@ -585,10 +583,11 @@ console.log("http://localhost:3001/locations/" + cityinurl + "/users/" + userid)
     <Row>
     <div className="chart">
       <Col>
-    <Line options={options} data={this.state.data1} />
+    <Line options={options1} data={this.state.data1} />
+    <br></br><br></br>
     </Col>
     <Col>
-    <Line options={options} data={this.state.data2} />
+    <Line options={options2} data={this.state.data2} />
     </Col>
     </div>
     </Row> 

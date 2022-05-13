@@ -135,7 +135,7 @@ td {
 }
 
 
-.ScrollStyle{
+.light.ScrollStyle{
   height: 250px;
   max-height: 250px;
   overflow-y: scroll;
