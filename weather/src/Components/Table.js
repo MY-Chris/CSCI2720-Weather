@@ -17,6 +17,28 @@ export default class Table extends Component {
   }
 
   componentDidMount() {
+    let theme = "dark";
+    (async () => {
+      const data = await fetch(
+        "http://localhost:3001/users/theme/" + "627be65d731afd1b3293a027"// GET theme path 
+      )
+      .then((res) => res.json())
+      .then((data) => data);
+      console.log(data);
+      this.setState({theme: data});
+      theme = data;
+  })();
+
+  document.getElementById("table").classList.remove("dark");
+  document.getElementById("table").classList.remove("light");
+  document.getElementById("table").classList.add(theme);
+  //console.log(document.getElementById("App").classList);
+  //document.getElementById("App").classList.remove("dark");
+  //document.getElementById("App").classList.remove("light");
+  //document.getElementById("App").classList.add(theme);
+  //console.log(document.getElementById("App").classList);
+
+  
     (async () => {
       const data = await fetch(
         "http://localhost:3001/locations"
@@ -27,19 +49,6 @@ export default class Table extends Component {
       this.setState({tableData: data});
       console.log(this.state.tableData)
     })();
-
-    // fetch theme
-    /*
-    (async () => {
-      const data = await fetch(
-        "http://localhost:3001/" // GET path 
-      )
-      .then((res) => res.json())
-      .then((data) => data);
-      console.log(data);
-      this.setState({theme: data});
-    })();
-    */
   }
 
   setChecked(e){

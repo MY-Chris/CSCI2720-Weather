@@ -165,7 +165,24 @@ export class DisplayWeather extends Component{
   componentDidMount() {
     let cityurl = window.location.pathname;
     let cityinurl = cityurl.substring(cityurl.lastIndexOf('/') + 1);
+    let theme = "dark";
     
+    (async () => {
+      const data = await fetch(
+        "http://localhost:3001/users/theme/" + "627be65d731afd1b3293a027"// GET theme path 
+      )
+      .then((res) => res.json())
+      .then((data) => data);
+      console.log(data);
+      this.setState({theme: data});
+      theme = data;
+  })();
+
+  
+      document.getElementById("displayweather").classList.remove("dark");
+      document.getElementById("displayweather").classList.remove("light");
+      document.getElementById("displayweather").classList.add(theme);
+      document.getElementById("App").classList.add(theme);
 
     (async () => {
       const data = await fetch(
@@ -483,7 +500,7 @@ export class DisplayWeather extends Component{
     </div>
     </Col>
     <Col>
-    <div className="comments dark" id="comments">
+    <div className="comments" id="comments">
     <div className="grad1 maincardbg">
             <h3 id="heading4" className="text-center" style={{marginTop: 5}}>Comments</h3>
             <i>Please scroll down to see all the comments.&emsp;&emsp;&emsp;</i>

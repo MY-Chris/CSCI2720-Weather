@@ -5,7 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
+   min-height: 100%;
+   width: 100%;
 }
 
 code {
@@ -130,15 +131,30 @@ th.down {
 
 
 /* Different color theme */
+html { height: 100%; } 
 
 .light {
   background-color: #fff;
   color: #123;
+  background-size: cover;
 }
 
 .dark {
   background-color: #212121;
   color: #b2d1e9;
+  height: 100%;
+}
+
+.light .body{
+  background-color: #fff;
+  color: #123;
+  background-size: cover;
+}
+
+.dark .body{
+  background-color: #212121;
+  color: #b2d1e9;
+  height: 100%;
 }
 
 
