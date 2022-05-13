@@ -31,6 +31,10 @@ const myfunctions1 = require('./weatherPart1.js');
 const myfunctions2 = require('./weatherPart2.js');
 
 const db = mongoose.connection;
+
+// use react 
+app.use( express.static('../weather/build'));
+
 db.on('error', console.error.bind(console, 'Connection error:'));
 db.once('open', function () {
     console.log("Connection is open...");
