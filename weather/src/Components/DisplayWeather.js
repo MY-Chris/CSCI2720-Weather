@@ -544,9 +544,10 @@ console.log("http://localhost:3001/locations/" + cityinurl + "/users/" + userid)
     </Col>
     </Row>
     <br></br><br></br>
-
+    <br></br><br></br><br></br>
     <Row>
         <Col>
+        <h5>{this.state.data.location.name} , {this.state.data.location.country} in the map:</h5>
         <div className="map">
         {/*<LoadScript
       googleMapsApiKey="AIzaSyBT7KTEpCi_Suspyvi-2Nqp7BVR2E6zQWM"
@@ -563,7 +564,6 @@ console.log("http://localhost:3001/locations/" + cityinurl + "/users/" + userid)
         <></>
       </GoogleMap>
       </LoadScript>*/}
-      
             <Map
                   google={this.props.google}
                   zoom={1}
@@ -582,6 +582,7 @@ console.log("http://localhost:3001/locations/" + cityinurl + "/users/" + userid)
        <div className="divchart">
     <Row>
     <div className="chart">
+      <h5>Historical weather information:</h5>
       <Col>
     <Line options={options1} data={this.state.data1} />
     <br></br><br></br>

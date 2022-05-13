@@ -231,7 +231,7 @@ export default class NavbarComp extends Component {
                         </Navbar.Collapse>
                     </Navbar>
 
-                    <div align="right">Current User: {currentUser}</div>
+                    <div align="right">Current User: {currentUser}&emsp;</div>
                 </div>
                 <div>
                     <Routes>
