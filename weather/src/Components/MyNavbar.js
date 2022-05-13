@@ -86,7 +86,7 @@ export default class NavbarComp extends Component {
         let location = useLocation();
         return (
             <div>
-                <h3 style={{color:"black"}}>
+                <h3 style={{color:"white"}}>
                     No match for <code>{location.pathname}</code>
                 </h3>
             </div>

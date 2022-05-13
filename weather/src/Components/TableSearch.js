@@ -102,6 +102,51 @@ export default class TableSearch extends Component {
         
         e.preventDefault();
     }
+
+    handleSorting = (sortField, sortOrder) => {
+      if (sortField) {
+        const sorted = [...this.state.tableData].sort((a, b) => {
+          if (a[sortField] === null) return 1;
+          if (b[sortField] === null) return -1;
+          if (a[sortField] === null && b[sortField] === null) return 0;
+          return (
+            a[sortField].toString().localeCompare(b[sortField].toString(), "en", {
+              numeric: true,
+            }) * (sortOrder === "asc" ? 1 : -1)
+          );
+        });
+        //setTableData(sorted);
+        this.setState({tableData: sorted});
+      }
+    };
+  
+    handleSortingChange = (accessor) => {
+      const sortOrder =
+        accessor === this.state.sortField && this.state.order === "asc" ? "desc" : "asc";
+      //setSortField(accessor);
+      this.setState({sortField: accessor});
+      //setOrder(sortOrder);
+      this.setState({order: sortOrder});
+      //handleSorting(accessor, sortOrder);
+      if (accessor) {
+        const sorted = [...this.state.tableData].sort((a, b) => {
+          if (a[accessor] === null) 
+            return 1;
+          if (b[accessor] === null) 
+            return -1;
+          if (a[accessor] === null && b[accessor] === null) 
+            return 0;
+          return (
+            a[accessor].toString().localeCompare(b[accessor].toString(), "en", {
+              numeric: true,
+            }) * (sortOrder === "asc" ? 1 : -1)
+          );
+        });
+        //setTableData(sorted);
+        this.setState({tableData: sorted});
+      }
+    };
+  
   
     render() {
       let searchbox;
