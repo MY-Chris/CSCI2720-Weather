@@ -47,7 +47,7 @@ app.post('/auth/signup', (req, res) => {
     //     }
     //     return hash;
     // };
-    User.findOne({ username: req.body['username'] }, (err, e) => {
+    schemas.User.findOne({ username: req.body['username'] }, (err, e) => {
             if (err)
                 res.send(err);
             else {
