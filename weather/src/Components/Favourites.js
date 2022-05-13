@@ -27,7 +27,7 @@ export default class Favourites extends Component {
             <div className="table_container">
             <br></br>
             <h3>My Favourites</h3>
-            <table className="table">
+            <table className="table" id="table">
                 <thead>
                 <tr>
                     <th>

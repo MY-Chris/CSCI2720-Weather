@@ -124,19 +124,14 @@ export default class Table extends Component {
   render(){
   return (
     <div>
-      <div className="toggle-container">
-      <button onClick={this.handleTheme}>{this.state.theme == "dark"? 
-        <img src={moon} width={50} /> 
-      : <img src={sun} width={50} />}</button>
-  </div>
-    <div className="table_container">
+    <div className="table_container" id="table_container">
       <br></br>
       <h3>Location List</h3>
       <small>
         Please click the up / down arrow at a field head to sort the table with 
         that field in ascending / descending order.
       </small>
-      <table className="table">
+      <table className="table" id="table">
         <caption>
           Column headers are
           sortable.

@@ -1,4 +1,4 @@
-.App {
+.Appu {
   text-align: center;
   /*background-image:url('./background.jpg');*/
   height: 100vh;
@@ -13,6 +13,10 @@
   background-size: cover;
   -webkit-background-size: cover;
   -o-background-size: cover;
+}
+
+.App {
+  text-align: center;
 }
 
 .App-logo {

@@ -67,6 +67,7 @@ export default class TableSearch extends Component {
           this.setState({resData: data});
         })();
         console.log(this.state.resData);
+        window.location.pathname = "/locations_search/" + this.state.field + "/" + this.state.value + "/" + this.state.value2
       }
     }
 
@@ -134,7 +135,7 @@ export default class TableSearch extends Component {
         Please click the up / down arrow at a field head to sort the table with 
         that field in ascending / descending order.
       </small>
-      <table className="table">
+      <table className="table" id="table">
         <caption>
           Column headers are
           sortable.

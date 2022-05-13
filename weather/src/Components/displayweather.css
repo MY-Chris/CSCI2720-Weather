@@ -108,6 +108,25 @@ button {
 }
 
 
+
+.dark.displayweather .maincard {
+  width: 540px;
+  height: 256px;
+  margin-top: 20px;
+  margin-bottom: 0px;
+  align-self:left;
+  padding: 50px;
+  border-radius: 20px;
+  position: relative;
+  
+}
+
+.dark.displayweather .maincardbg {
+  background: rgb(41, 44, 49);
+  background-image: radial-gradient(rgba(72, 81, 87, 0.404) 25%, rgb(30, 30, 30));
+  
+}
+
 h4 {
   text-align: left;
   margin-right: 30px;
@@ -129,7 +148,7 @@ td {
 }
 
 .comments{
-  margin-top: 40px;
+  margin-top: 20px;
   margin-bottom: 160px;
   height: 256px;
   display: flex;
@@ -150,8 +169,25 @@ td {
   background-image: radial-gradient(rgb(221, 233, 241) 45%, white);
 }
 
-.grad1{
+.dark.comments .comments-card{
+  width: 440px;
+  height: 256px;
+  margin-top: 20px;
+  margin-bottom: 0px;
+  align-self: left;
+  padding: 50px;
+  border-radius: 20px;
+  position: relative;
+  background: rgb(59, 64, 71);
+  background-image: radial-gradient(rgba(72, 81, 87, 0.404) 25%, rgb(30, 30, 30));
+}
+
+.comments .grad1{
   background-image: radial-gradient(rgb(221, 233, 241) 45%, white);
+}
+
+.dark.comments.grad1{
+  background-image: radial-gradient(rgba(72, 81, 87, 0.404) 25%, rgb(30, 30, 30));
 }
 
 .map{
