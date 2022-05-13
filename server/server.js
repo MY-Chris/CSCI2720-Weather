@@ -55,6 +55,10 @@ app.use(adminBro.options.rootPath, router);
 
 
 //Add Routes here
+// app.get('/to_admin',(req,res)=>{
+//     res.redirect('/admin');
+// })
+
 // User login
 app.post('/auth/signup', (req, res) => {
 

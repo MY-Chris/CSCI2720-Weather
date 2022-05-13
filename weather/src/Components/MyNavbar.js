@@ -15,6 +15,7 @@ import moon from '../images/moon.png'
 import Login from "./Login";
 import Signup from "./Signup";
 import Logout from './Logout'
+import Admin from "./Admin"
 import Table from './Table';
 import MapGoogle from './MapGoogle';
 import TableSearch from './TableSearch';
@@ -186,6 +187,7 @@ export default class NavbarComp extends Component {
 
                                     <Nav.Link as={Link} to="/login">Log in</Nav.Link>
                                     <Nav.Link as={Link} to="/signup">Sign up</Nav.Link>
+                                    <Nav.Link as={Link} to="/admin">Sign up</Nav.Link>
 
 
 
@@ -199,6 +201,7 @@ export default class NavbarComp extends Component {
                             <Route exact path="/" element={<Home/>}/>
                             <Route exact path="/login" element={<Login/>}/>
                             <Route exact path="/signup" element={<Signup/>}/>
+                            <Route exact path="/admin" element={<Admin/>}/>
                             <Route path="*" element={<this.NoMatch/>}/>
 
 
