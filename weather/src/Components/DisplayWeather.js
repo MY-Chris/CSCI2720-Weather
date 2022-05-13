@@ -518,6 +518,7 @@ console.log("http://localhost:3001/locations/" + cityinurl + "/users/" + userid)
             <h3 id="heading4" className="text-center" style={{marginTop: 5}}>Comments</h3>
             <i>Please scroll down to see all the comments.&emsp;&emsp;&emsp;</i>
             <div id="comments" className="ScrollStyle"> 
+            <br></br>
             {this.state.comments.map((data) => {
               //console.log(data);
               return (
