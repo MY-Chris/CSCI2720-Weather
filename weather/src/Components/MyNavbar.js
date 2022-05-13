@@ -34,7 +34,7 @@ export default class NavbarComp extends Component {
 
     constructor(props) {
         super(props);
-        this.logOut = this.logOut.bind(this);
+
 
         this.state = {
             currentUser: undefined,
@@ -80,17 +80,11 @@ export default class NavbarComp extends Component {
         EventBus.remove("logout");
     }
 
-    logOut() {
-        AuthService.logout();
-        this.setState({
-            currentUser: undefined,
-        });
-    }
     NoMatch() {
         let location = useLocation();
         return (
             <div>
-                <h3 style={{color:"white"}}>
+                <h3 style={{color:"black"}}>
                     No match for <code>{location.pathname}</code>
                 </h3>
             </div>
