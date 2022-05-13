@@ -48,13 +48,13 @@ export default class TableSearch extends Component {
           .then((res) => res.json())
           .then((data) => data);
           console.log(data);
-          this.setState({resData: data});
+          this.setState({tableData: data});
         })();
-        console.log(this.state.resData);
+        console.log(this.state.tableData);
         //alert('A name was submitted: ' + this.state.resData);
         //console.log(this.state.value2);
         //event.preventDefault();
-        window.location.pathname = "/locations_search/locName/" + this.state.value;
+        //window.location.pathname = "/locations_search/locName/" + this.state.value;
       }
       else{
         (async () => {
@@ -64,10 +64,10 @@ export default class TableSearch extends Component {
           .then((res) => res.json())
           .then((data) => data);
           console.log(data);
-          this.setState({resData: data});
+          this.setState({tableData: data});
         })();
-        console.log(this.state.resData);
-        window.location.pathname = "/locations_search/" + this.state.field + "/" + this.state.value + "/" + this.state.value2
+        console.log(this.state.tableData);
+        //window.location.pathname = "/locations_search/" + this.state.field + "/" + this.state.value + "/" + this.state.value2
       }
     }
 
@@ -93,7 +93,7 @@ export default class TableSearch extends Component {
         <input type="text" value={this.state.value} onChange={this.handleChange} />&emsp;
         <input type="text" value={this.state.value2} onChange={this.handleChange2} />
         </div>;
-        formaction = "/locations_search/" + this.state.field + "/" + this.state.value + "/" + this.state.value2;
+        //formaction = "/locations_search/" + this.state.field + "/" + this.state.value + "/" + this.state.value2;
         console.log(formaction)
       }
       else{
@@ -102,7 +102,7 @@ export default class TableSearch extends Component {
         <small>Please input a city:</small>&emsp;
         <input type="text" value={this.state.value} onChange={this.handleChange} />
         </div>
-        formaction = "/locations_search/locName/" + this.state.value;
+        //formaction = "/locations_search/locName/" + this.state.value;
       }
 
       return (
