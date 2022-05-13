@@ -292,5 +292,5 @@ s.start().then(res => {
     s.applyMiddleware({app});
 });
 
-const server = app.listen(3001);
+const server = app.listen(80);
 
