@@ -188,7 +188,7 @@ export default class NavbarComp extends Component {
 
                                     <Nav.Link as={Link} to="/login">Log in</Nav.Link>
                                     <Nav.Link as={Link} to="/signup">Sign up</Nav.Link>
-                                    <Nav.Link as={Link} to="/admin">Sign up</Nav.Link>
+                                    <Nav.Link as={Link} to="/admin">Admin</Nav.Link>
 
 
 

@@ -52,6 +52,12 @@ class AuthService {
     else
       return JSON.parse(sessionStorage.getItem('user'));
   }
+  getUserId() {
+    if (sessionStorage.getItem('userid') == "undefined")
+      return undefined
+    else
+      return JSON.parse(sessionStorage.getItem('userid'));
+  }
 }
 
 export default new AuthService();
