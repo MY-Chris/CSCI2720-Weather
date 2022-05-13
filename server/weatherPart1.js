@@ -139,7 +139,7 @@ const getTheme = function( userId, res){
                 console.log(err);
             else
                 console.log(response);
-                res.send(response.preference);
+                res.send(JSON.stringify(response));
         }
     );
     

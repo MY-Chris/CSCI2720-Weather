@@ -168,9 +168,10 @@ export class DisplayWeather extends Component{
     let cityinurl = cityurl.substring(cityurl.lastIndexOf('/') + 1);
     let theme = "dark";
     
+    let userid = sessionStorage.getItem('userid').toString().substring(1, 25);
     (async () => {
       const data = await fetch(
-        "http://localhost:3001/users/theme/" + "627be65d731afd1b3293a027"// GET theme path 
+        "http://localhost:3001/users/theme/" + userid// GET theme path 
       )
       .then((res) => res.json())
       .then((data) => data);
@@ -186,10 +187,10 @@ export class DisplayWeather extends Component{
       document.getElementById("App").classList.remove("dark");
       document.getElementById("App").classList.remove("light");
       document.getElementById("App").classList.add(theme);
-
+console.log("http://localhost:3001/locations/" + cityinurl + "/users/" + userid);
     (async () => {
       const data = await fetch(
-        "http://localhost:3001/locations/" + cityinurl + "/users/" + "627be65d731afd1b3293a027"
+        "http://localhost:3001/locations/" + cityinurl + "/users/" + userid
       )
       .then((res) => res.json())
       .then((data) => data);
@@ -310,7 +311,8 @@ export class DisplayWeather extends Component{
     //let data = "location=" + cityinurl;
     console.log(cityinurl);
     console.log(status);
-    fetch('http://localhost:3000/locations/' + cityinurl + "/users/" + "testuserid" + "/fav/" + status)
+    let userid = sessionStorage.getItem('userid').toString().substring(1, 25);
+    fetch('http://localhost:3000/locations/' + cityinurl + "/users/" + userid + "/fav/" + status)
         .then((res) => res.text())
         .then((data) => {
           data.replace(/\n/g, "");
@@ -331,7 +333,8 @@ export class DisplayWeather extends Component{
         content: content}])})
 
     let data = "content="+ content;
-        fetch('http://localhost:3001/locations/' + cityinurl + "/users/" + "627be65d731afd1b3293a027", {
+    let userid = sessionStorage.getItem('userid').toString().substring(1, 25);
+        fetch('http://localhost:3001/locations/' + cityinurl + "/users/" + userid, {
             headers: {
             "Content-Type": "application/x-www-form-urlencoded",
             },

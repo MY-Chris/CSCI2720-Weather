@@ -6,9 +6,14 @@ export default class Home extends Component {
     componentDidMount() {
 
         let theme = "light";
+        console.log(userid);
+        let userid = sessionStorage.getItem('userid').toString().substring(1, 25);
+        console.log("http://localhost:3001/users/theme/" + userid)
+        
+        if(userid != undefined){
         (async () => {
           const data = await fetch(
-            "http://localhost:3001/users/theme/" + "627e5d8d2705fc491e64aa1a"// GET theme path 
+            "http://localhost:3001/users/theme/" + userid// GET theme path 
           )
           .then((res) => res.json())
           .then((data) => data);
@@ -21,7 +26,7 @@ export default class Home extends Component {
       document.getElementById("header").classList.add(theme);
       document.getElementById("App").classList.remove("dark");
       document.getElementById("App").classList.remove("light");
-      document.getElementById("App").classList.add(theme);
+      document.getElementById("App").classList.add(theme);}
       
       }
     

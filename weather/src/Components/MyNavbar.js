@@ -59,9 +59,12 @@ export default class NavbarComp extends Component {
         }
 
         let usertheme = "light";
+        console.log(sessionStorage.getItem('userid'));
+        let userid = sessionStorage.getItem('userid').toString().substring(1, 25);
+        if(userid != undefined){
         (async () => {
             const data = await fetch(
-              "http://localhost:3001/users/theme/" + "627be65d731afd1b3293a027"// GET theme path 
+              "http://localhost:3001/users/theme/" + userid// GET theme path 
             )
             .then((res) => res.json())
             .then((data) => data);
@@ -76,6 +79,7 @@ export default class NavbarComp extends Component {
         EventBus.on("logout", () => {
             this.logOut();
         });
+    }
     }
 
     componentWillUnmount() {
@@ -123,7 +127,8 @@ export default class NavbarComp extends Component {
             document.getElementById("comments").classList.add(newtheme);
         }
         console.log(document.getElementById("App"));
-        let data = "userId=" + "627be65d731afd1b3293a027" + "&theme=" + newtheme;
+        let userid = sessionStorage.getItem('userid').toString().substring(1, 25);
+        let data = "userId=" + userid + "&theme=" + newtheme;
         console.log(data);
         fetch('http://localhost:3001/users/theme', {
                 headers: {

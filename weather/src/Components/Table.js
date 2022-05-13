@@ -17,17 +17,18 @@ export default class Table extends Component {
 
   componentDidMount() {
     let theme = "dark";
+    let userid = sessionStorage.getItem('userid').toString().substring(1, 25);
     (async () => {
       const data = await fetch(
-        "http://localhost:3001/users/theme/" + "627e7a672705fc491e64aae0"// GET theme path 
+        "http://localhost:3001/users/theme/" + userid// GET theme path 
       )
       .then((res) => res.json())
       .then((data) => data);
       console.log(data);
-      this.setState({theme: data.preference});
+      this.setState({theme: data.preference}, ()=>{console.log(this.state.theme)});
       theme = data.preference;
   })();
-
+  console.log(theme)
   document.getElementById("table").classList.remove("dark");
   document.getElementById("table").classList.remove("light");
   document.getElementById("table").classList.add(theme);
