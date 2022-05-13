@@ -7,26 +7,27 @@ export default class Home extends Component {
 
         let theme = "light";
         console.log(userid);
-        let userid = sessionStorage.getItem('userid').toString().substring(1, 25);
+        let userid = sessionStorage.getItem('userid');
         console.log("http://localhost:3001/users/theme/" + userid)
         
         if(userid != undefined){
-        (async () => {
-          const data = await fetch(
-            "http://localhost:3001/users/theme/" + userid// GET theme path 
-          )
-          .then((res) => res.json())
-          .then((data) => data);
-          console.log(data);
-          theme = data.preference;
-      })();
-    
-      document.getElementById("header").classList.remove("dark");
-      document.getElementById("header").classList.remove("light");
-      document.getElementById("header").classList.add(theme);
-      document.getElementById("App").classList.remove("dark");
-      document.getElementById("App").classList.remove("light");
-      document.getElementById("App").classList.add(theme);}
+            userid = userid.toString().substring(1, 25);
+            (async () => {
+            const data = await fetch(
+                "http://localhost:3001/users/theme/" + userid// GET theme path 
+            )
+            .then((res) => res.json())
+            .then((data) => data);
+            console.log(data);
+            theme = data.preference;
+        })();
+        
+        document.getElementById("header").classList.remove("dark");
+        document.getElementById("header").classList.remove("light");
+        document.getElementById("header").classList.add(theme);
+        document.getElementById("App").classList.remove("dark");
+        document.getElementById("App").classList.remove("light");
+        document.getElementById("App").classList.add(theme);}
       
       }
     

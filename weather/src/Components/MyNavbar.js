@@ -60,8 +60,9 @@ export default class NavbarComp extends Component {
 
         let usertheme = "light";
         console.log(sessionStorage.getItem('userid'));
-        let userid = sessionStorage.getItem('userid').toString().substring(1, 25);
+        let userid = sessionStorage.getItem('userid');
         if(userid != undefined){
+            userid = userid.toString().substring(1, 25);
         (async () => {
             const data = await fetch(
               "http://localhost:3001/users/theme/" + userid// GET theme path 
@@ -74,7 +75,6 @@ export default class NavbarComp extends Component {
             document.getElementById("App").classList.remove("light");
             document.getElementById("App").classList.add(usertheme);
         })();
-
 
         // EventBus.on("logout", () => {
         //     this.logOut();
