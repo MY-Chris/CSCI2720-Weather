@@ -71,10 +71,10 @@ export default class NavbarComp extends Component {
             console.log(data);
             usertheme = data.preference;
             this.setState({theme: data.preference});
+            document.getElementById("App").classList.remove("light");
+            document.getElementById("App").classList.add(usertheme);
         })();
 
-        document.getElementById("App").classList.remove("light");
-        document.getElementById("App").classList.add(usertheme);
 
         EventBus.on("logout", () => {
             this.logOut();

@@ -134,10 +134,19 @@ td {
   font-size: 1.2rem;
 }
 
+
 .ScrollStyle{
   height: 250px;
   max-height: 250px;
   overflow-y: scroll;
+  background-image: radial-gradient(rgba(221, 233, 241, 0.836) 45%, white);
+}
+
+.dark.ScrollStyle{
+  height: 250px;
+  max-height: 250px;
+  overflow-y: scroll;
+  background-image: radial-gradient(rgba(72, 81, 87, 0.404) 45%, rgb(30, 30, 30));
 }
 
 .comments{

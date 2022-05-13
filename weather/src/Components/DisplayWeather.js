@@ -178,15 +178,16 @@ export class DisplayWeather extends Component{
       console.log(data);
       this.setState({theme: data.preference});
       theme = data.preference;
-  })();
-
-  
+      
       document.getElementById("displayweather").classList.remove("dark");
       document.getElementById("displayweather").classList.remove("light");
       document.getElementById("displayweather").classList.add(theme);
       document.getElementById("App").classList.remove("dark");
       document.getElementById("App").classList.remove("light");
       document.getElementById("App").classList.add(theme);
+  })();
+
+      
 console.log("http://localhost:3001/locations/" + cityinurl + "/users/" + userid);
     (async () => {
       const data = await fetch(
@@ -523,7 +524,7 @@ console.log("http://localhost:3001/locations/" + cityinurl + "/users/" + userid)
               //console.log(data);
               return (
                 <div key={data._id}>
-                  <h5>{data.username}</h5>
+                  <h5>{data.username}:</h5>
                   <p>{data.content}</p>
                 </div>
               );

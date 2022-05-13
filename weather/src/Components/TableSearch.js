@@ -28,16 +28,16 @@ export default class TableSearch extends Component {
         console.log(data);
         this.setState({theme: data.preference});
         theme = data.preference;
+        document.getElementById("table").classList.remove("dark");
+        document.getElementById("table").classList.remove("light");
+        document.getElementById("table").classList.add(theme);
+        //console.log(document.getElementById("App").classList);
+        document.getElementById("App").classList.remove("dark");
+        document.getElementById("App").classList.remove("light");
+        document.getElementById("App").classList.add(theme);
+        //console.log(document.getElementById("App").classList);
     })();
   
-    document.getElementById("table").classList.remove("dark");
-    document.getElementById("table").classList.remove("light");
-    document.getElementById("table").classList.add(theme);
-    //console.log(document.getElementById("App").classList);
-    document.getElementById("App").classList.remove("dark");
-    document.getElementById("App").classList.remove("light");
-    document.getElementById("App").classList.add(theme);
-    //console.log(document.getElementById("App").classList);
   
     }
 
