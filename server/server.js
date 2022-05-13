@@ -33,7 +33,56 @@ app.use(morgan('myformat', {"stream": accessLogStream}));
 
 
 //Add Routes here
+// User login
+app.post('/auth/signup', (req, res) => {
 
+
+    // function hash(s) {
+    //     var hash = 0, i, chr;
+    //     if (s.length === 0) return hash;
+    //     for (i = 0; i < s.length; i++) {
+    //         chr = s.charCodeAt(i);
+    //         hash = ((hash << 5) - hash) + chr;
+    //         hash |= 0;
+    //     }
+    //     return hash;
+    // };
+
+    schemas.User.create({
+        username: req.body['username'],
+        password: req.body['password'],
+    }, (err, e) => {
+        if (err)
+            res.send({message: err});
+        else
+            res.send({message:"Successfully signed up."});
+    });
+});
+// User sign up
+app.post('/auth/signin', (req, res) => {
+
+    // function hash(s) {
+    //     var hash = 0, i, chr;
+    //     if (s.length === 0) return hash;
+    //     for (i = 0; i < s.length; i++) {
+    //         chr = s.charCodeAt(i);
+    //         hash = ((hash << 5) - hash) + chr;
+    //         hash |= 0;
+    //     }
+    //     return hash;
+    // };
+    schemas.User.findOne({ username: req.body['username'] }, (err, e) => {
+        if (err)
+            res.send({message: err});
+        else {
+            if req.body['password'] == e.password) {
+                res.send({user:req.body['username'],message: "Successfully logged in."});
+            }
+            else
+                res.send({message: "Incorrect password"});
+        }
+    });
+});
 //User feature 4
 app.get('/locations/:locName/users/:userId', (req, res) => {
     myfunctions2.showLocationDetail(req.params.locName, req.params.userId, res);

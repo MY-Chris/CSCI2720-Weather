@@ -78,7 +78,7 @@ export default class NavbarComp extends Component {
 
     render() {
         const {currentUser} = this.state;
-        if (currentUser != undefined) {
+        if (currentUser == undefined) {
             return (
 
                 <Router>

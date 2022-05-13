@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import { isEmail } from "validator";
 import AuthService from "../services/auth.service";
 
 
@@ -11,13 +10,11 @@ export default class Register extends Component {
     super(props);
     this.handleRegister = this.handleRegister.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
-    this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
     this.onChangePassword1 = this.onChangePassword1.bind(this);
 
     this.state = {
       username: "",
-      email: "",
       password: "",
       password1: "",
       successful: false,
@@ -31,11 +28,6 @@ export default class Register extends Component {
     });
   }
 
-  onChangeEmail(e) {
-    this.setState({
-      email: e.target.value
-    });
-  }
 
   onChangePassword(e) {
     this.setState({
@@ -61,7 +53,6 @@ export default class Register extends Component {
     if (this.checkBtn.context._errors.length === 0) {
       AuthService.register(
         this.state.username,
-        this.state.email,
         this.state.password
       ).then(
         response => {
@@ -107,15 +98,6 @@ export default class Register extends Component {
       }
     };
 
-    const email = value => {
-      if (!isEmail(value)) {
-        return (
-            <div className="alert alert-danger" role="alert">
-              This is not a valid email.
-            </div>
-        );
-      }
-    };
 
     const vusername = value => {
       if (value.length < 4 || value.length > 20) {
@@ -164,17 +146,6 @@ export default class Register extends Component {
                   />
                 </div>
 
-                <div className="form-group">
-                  <label htmlFor="email">Email</label>
-                  <Input
-                    type="text"
-                    className="form-control"
-                    name="email"
-                    value={this.state.email}
-                    onChange={this.onChangeEmail}
-                    validations={[required, email]}
-                  />
-                </div>
 
                 <div className="form-group">
                   <label htmlFor="password">Password</label>
