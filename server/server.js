@@ -58,7 +58,32 @@ const locale = {
     },
 };
 const AdminBroOptions = {
-    resources: [schemas.User, schemas.Location, schemas.Comment],
+    resources: [{resource: schemas.User,}, {resource: schemas.Comment,}, {
+        resource: schemas.Location,
+        options: {
+            actions: {
+                requestUpdatedData: {
+                    actionType: 'resource',
+                    handler: async () => {
+                        const locs = await schemas.Location.find().lean().exec();
+                        locs.forEach(async loc => {
+                            let url = 'http://api.weatherapi.com/v1/current.json?key=072f5ae9c4c849f8858104048220805&q=' + loc.locName;
+                            const weather_info = await myfunctions1.weatherRequest(url);
+                            const updatedLoc = await schemas.Location.findOneAndUpdate({locName: loc.locName}, {
+                                temp_c: weather_info.current.temp_c,
+                                wind_kph: weather_info.current.wind_kph,
+                                wind_dir: weather_info.current.wind_dir,
+                                humidity: weather_info.current.humidity,
+                                precip_mm: weather_info.current.precip_mm,
+                                vis_km: weather_info.current.vis_km
+                            });
+                        });
+                    },
+                    component: false,
+                }
+            }
+        }
+    }],
     rootPath: '/admin',
     locale,
     branding: {
@@ -70,8 +95,10 @@ const AdminBroOptions = {
 const adminBro = new AdminBro(AdminBroOptions)
 const router = AdminBroExpress.buildAuthenticatedRouter(adminBro, {
     authenticate: (username, password) => {
+        let currentuser = {};
+        currentuser.email = 'admin';
         if (username === 'admin' && password === 'admin')
-            return true;
+            return currentuser;
         else
             return false;
     },
