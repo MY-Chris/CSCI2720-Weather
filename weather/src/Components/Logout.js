@@ -13,7 +13,7 @@ export default class Logout extends Component {
         // });
         return (
             <div>
-                <h2 style={{color:"white"}}>Logout Successfully</h2>
+                <h2 style={{color:"black"}}>Logout Successfully</h2>
             </div>
         )
     }

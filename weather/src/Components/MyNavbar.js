@@ -134,8 +134,8 @@ export default class NavbarComp extends Component {
                             >
 
 
-                                <Nav.Link as={Link} to="/login">Log in</Nav.Link>
-                                <Nav.Link as={Link} to="/signup">Sign up</Nav.Link>
+                                {/*<Nav.Link as={Link} to="/login">Log in</Nav.Link>*/}
+                                {/*<Nav.Link as={Link} to="/signup">Sign up</Nav.Link>*/}
 
                                 <Nav.Link as={Link} to="/table">Table</Nav.Link>
                                 <Nav.Link as={Link} to="/locations_search">Search</Nav.Link>
@@ -148,14 +148,16 @@ export default class NavbarComp extends Component {
 
                         </Navbar.Collapse>
                     </Navbar>
+
+                    <div align="right">Current User: {currentUser}</div>
                 </div>
                 <div>
                     <Routes>
                         <Route exact path="/" element={<Home/>}/>
 
-                        <Route exact path="/login" element={<Login/>}/>
+                        {/*<Route exact path="/login" element={<Login/>}/>*/}
 
-                        <Route exact path="/signup" element={<Signup/>}/>
+                        {/*<Route exact path="/signup" element={<Signup/>}/>*/}
 
                         <Route exact path="/logout" element={<Logout/>}/>
 

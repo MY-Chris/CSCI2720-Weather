@@ -44,51 +44,32 @@ app.use(morgan('myformat', {"stream": accessLogStream}));
 // User login
 app.post('/auth/signup', (req, res) => {
 
-
-    // function hash(s) {
-    //     var hash = 0, i, chr;
-    //     if (s.length === 0) return hash;
-    //     for (i = 0; i < s.length; i++) {
-    //         chr = s.charCodeAt(i);
-    //         hash = ((hash << 5) - hash) + chr;
-    //         hash |= 0;
-    //     }
-    //     return hash;
-    // };
     schemas.User.findOne({ username: req.body['username'] }, (err, e) => {
             if (err)
-                res.send(err);
+                res.status(400).send(err);
             else {
-                if(e==null)
+                if(e!=null)
                 {
-                    res.send({message: "Account already exists!"});
-                    return;
+                    res.status(400).send({message: "Account already exists!"});
+
+                }
+                else{
+                    schemas.User.create({
+                        username: req.body['username'],
+                        password: req.body['password'],
+                    }, (err, e) => {
+                        if (err)
+                            res.status(400).send({message: err});
+                        else
+                            res.send({message:"Successfully signed up."});
+                    });
                 }
             }
         });
-    schemas.User.create({
-        username: req.body['username'],
-        password: req.body['password'],
-    }, (err, e) => {
-        if (err)
-            res.send({message: err});
-        else
-            res.send({message:"Successfully signed up."});
-    });
 });
 // User sign up
 app.post('/auth/signin', (req, res) => {
 
-    // function hash(s) {
-    //     var hash = 0, i, chr;
-    //     if (s.length === 0) return hash;
-    //     for (i = 0; i < s.length; i++) {
-    //         chr = s.charCodeAt(i);
-    //         hash = ((hash << 5) - hash) + chr;
-    //         hash |= 0;
-    //     }
-    //     return hash;
-    // };
     schemas.User.findOne({ username: req.body['username'] }, (err, e) => {
         if (err)
             res.status(400).send({message: err});
