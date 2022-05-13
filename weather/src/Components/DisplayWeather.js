@@ -183,6 +183,8 @@ export class DisplayWeather extends Component{
       document.getElementById("displayweather").classList.remove("dark");
       document.getElementById("displayweather").classList.remove("light");
       document.getElementById("displayweather").classList.add(theme);
+      document.getElementById("App").classList.remove("dark");
+      document.getElementById("App").classList.remove("light");
       document.getElementById("App").classList.add(theme);
 
     (async () => {

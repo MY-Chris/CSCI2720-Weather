@@ -2,8 +2,10 @@ import React, { Component } from "react";
 
 
 export default class Home extends Component {
+
     componentDidMount() {
-        let theme = "dark";
+
+        let theme = "light";
         (async () => {
           const data = await fetch(
             "http://localhost:3001/users/theme/" + "627e5d8d2705fc491e64aa1a"// GET theme path 
@@ -27,7 +29,7 @@ export default class Home extends Component {
 
    render(){
        return (
-           <b id="header" className="header">Weathering With Me</b>
+           <b id="header" className="header" style={{color: "#a0ccee"}}>Weathering With Me</b>
        )
    }
 
