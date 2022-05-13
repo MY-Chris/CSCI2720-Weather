@@ -33,18 +33,8 @@ const CommentSchema = mongoose.Schema({
     content: {type: String, required: true}
 });
 
-const RequestSchema = mongoose.Schema({
-    userId: {type: Schema.Types.ObjectId, required: true},
-    userIP: String,
-    userBrowser: String,
-    dateTime: Date,
-    reqMethod: String,
-    reqUrl: String
-});
-
 const User = mongoose.model('User', UserSchema);
 const Location = mongoose.model('Location', LocationSchema);
 const Comment = mongoose.model('Comment', CommentSchema);
-const Request = mongoose.model('Request', RequestSchema);
 
-module.exports = {User, Location, Comment, Request};
+module.exports = {User, Location, Comment};
