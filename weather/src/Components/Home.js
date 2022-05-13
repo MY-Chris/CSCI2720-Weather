@@ -13,8 +13,7 @@ export default class Home extends Component {
           .then((res) => res.json())
           .then((data) => data);
           console.log(data);
-          this.setState({theme: data});
-          theme = data;
+          theme = data.preference;
       })();
     
       document.getElementById("header").classList.remove("dark");

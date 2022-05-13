@@ -66,8 +66,8 @@ export default class NavbarComp extends Component {
             .then((res) => res.json())
             .then((data) => data);
             console.log(data);
-            usertheme = data;
-            this.setState({theme: data});
+            usertheme = data.preference;
+            this.setState({theme: data.preference});
         })();
 
         document.getElementById("App").classList.remove("light");

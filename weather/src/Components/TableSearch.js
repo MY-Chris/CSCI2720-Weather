@@ -25,8 +25,8 @@ export default class TableSearch extends Component {
         .then((res) => res.json())
         .then((data) => data);
         console.log(data);
-        this.setState({theme: data});
-        theme = data;
+        this.setState({theme: data.preference});
+        theme = data.preference;
     })();
   
     document.getElementById("table").classList.remove("dark");
