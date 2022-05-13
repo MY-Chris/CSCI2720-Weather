@@ -59,7 +59,7 @@ app.post('/auth/signup', (req, res) => {
             if (err)
                 res.send(err);
             else {
-                if(e==null)
+                if(e!=null)
                 {
                     res.send({message: "Account already exists!"});
                     return;
