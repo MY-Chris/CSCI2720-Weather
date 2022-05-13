@@ -145,30 +145,6 @@ export default class NavbarComp extends Component {
       }
 
 
-      checkTheme(e){
-        console.log(this.state.theme);
-        let curtheme = this.state.theme;
-        
-        console.log(document.getElementById("App"));
-        document.getElementById("App").classList.remove("dark");
-        document.getElementById("App").classList.add(curtheme);
-
-        if(document.getElementById("table")){
-            document.getElementById("table").classList.remove("dark");
-            document.getElementById("table").classList.add(curtheme);
-        }
-
-        if(document.getElementById("displayweather")){
-            document.getElementById("displayweather").classList.remove("dark");
-            document.getElementById("displayweather").classList.add(curtheme);
-            document.getElementById("comments").classList.remove("dark");
-            document.getElementById("comments").classList.add(curtheme);
-        }
-        console.log(document.getElementById("App"));
-        
-      }
-
-
     render() {
         const {currentUser} = this.state;
         if (currentUser == undefined) {
@@ -238,7 +214,7 @@ export default class NavbarComp extends Component {
                                 {/*<Nav.Link as={Link} to="/login">Log in</Nav.Link>*/}
                                 {/*<Nav.Link as={Link} to="/signup">Sign up</Nav.Link>*/}
 
-                                <Nav.Link as={Link} to="/table" onClick={this.checkTheme}>Table</Nav.Link>
+                                <Nav.Link as={Link} to="/table">Table</Nav.Link>
                                 <Nav.Link as={Link} to="/locations_search">Search</Nav.Link>
                                 <Nav.Link as={Link} to="/mapgoogle">Map</Nav.Link>
                                 <Nav.Link as={Link} to="/favourites">Favourites</Nav.Link>

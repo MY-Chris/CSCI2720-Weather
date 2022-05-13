@@ -33,9 +33,9 @@ export default class TableSearch extends Component {
     document.getElementById("table").classList.remove("light");
     document.getElementById("table").classList.add(theme);
     //console.log(document.getElementById("App").classList);
-    //document.getElementById("App").classList.remove("dark");
-    //document.getElementById("App").classList.remove("light");
-    //document.getElementById("App").classList.add(theme);
+    document.getElementById("App").classList.remove("dark");
+    document.getElementById("App").classList.remove("light");
+    document.getElementById("App").classList.add(theme);
     //console.log(document.getElementById("App").classList);
   
     }

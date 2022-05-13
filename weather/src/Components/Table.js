@@ -13,7 +13,6 @@ export default class Table extends Component {
     ],
     sortField: "", order: "asc", theme: "dark"};
 
-    this.handleTheme = this.handleTheme.bind(this);
   }
 
   componentDidMount() {
@@ -55,34 +54,6 @@ export default class Table extends Component {
     console.log(e.currentTarget.checked);
     //this.setState({favourite: e.currentTarget.checked});
     //console.log(this.state.favourite)
-  }
-
-  handleTheme(e){
-    console.log(this.state.theme);
-    if(this.state.theme == "dark"){
-      this.setState({theme: "light"});
-    }
-    else{
-      this.setState({theme: "dark"});
-    }
-    console.log(this.state.theme);
-    let data = "userId=" + "627be65d731afd1b3293a027" + "&theme=" + this.state.theme;
-    fetch('http://localhost:3001/users/theme', {
-            headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-            },
-            //mode: 'cors',
-            method: 'PUT',
-            body: data
-        })
-        .then(res => res.text())
-        .then(data => {
-            data.replace(/\n/g, "");
-            console.log("put done!");
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
   }
 
   handleSorting = (sortField, sortOrder) => {
