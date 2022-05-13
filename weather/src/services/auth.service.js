@@ -1,7 +1,7 @@
 import axios from "axios";
 import bcrypt from 'bcryptjs'
 const salt = '$2a$10$CwTycUXWue0Thq9StjUM0u' //bcrypt.genSaltSync(10)
-const API_URL = "http://localhost:3001/auth/";
+const API_URL = "http://localhost:80/auth/";
 
 function hash(s) {
   var hash = 0, i, chr;
