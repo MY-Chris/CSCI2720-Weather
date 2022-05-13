@@ -37,7 +37,7 @@ export default class Table extends Component {
   //document.getElementById("App").classList.remove("light");
   //document.getElementById("App").classList.add(theme);
   //console.log(document.getElementById("App").classList);
-
+  console.log(JSON.parse(sessionStorage.getItem('user')));
   
     (async () => {
       const data = await fetch(

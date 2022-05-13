@@ -37,7 +37,7 @@ export default class NavbarComp extends Component {
 
         this.state = {
             currentUser: undefined,
-            theme: "dark"
+            theme: "light"
         };
 
         this.handleTheme = this.handleTheme.bind(this);
@@ -46,7 +46,7 @@ export default class NavbarComp extends Component {
     componentDidMount() {
         const user = AuthService.getCurrentUser();
 
-        if (1) {
+        if (user) {
             this.setState({
                 currentUser: user,
             });
@@ -55,7 +55,7 @@ export default class NavbarComp extends Component {
             document.getElementById("App").classList.add("App");
         }
 
-        let usertheme = "dark";
+        let usertheme = "light";
         (async () => {
             const data = await fetch(
               "http://localhost:3001/users/theme/" + "627be65d731afd1b3293a027"// GET theme path 
@@ -67,7 +67,7 @@ export default class NavbarComp extends Component {
             this.setState({theme: data});
         })();
 
-        document.getElementById("App").classList.remove("dark");
+        document.getElementById("App").classList.remove("light");
         document.getElementById("App").classList.add(usertheme);
 
         EventBus.on("logout", () => {
@@ -168,7 +168,7 @@ export default class NavbarComp extends Component {
 
     render() {
         const {currentUser} = this.state;
-        if (currentUser != undefined) {
+        if (currentUser == undefined) {
             return (
 
                 <Router>
