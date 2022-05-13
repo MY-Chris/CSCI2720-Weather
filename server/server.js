@@ -97,11 +97,10 @@ app.post('/auth/signin', (req, res) => {
                 res.status(400).send({message: "Invalid username"});
             }
             else{
-                // console.log(e[_id].str);
                 if (req.body['password'] == e.password) {
                     req.session.loggedin = true;
                     req.session.username = req.body['username'];
-                    res.send({user:req.body['username'],userid:e._id,message: "Successfully logged in."});
+                    res.send({user:req.body['username'],userid:JSON.stringify(e._id),message: "Successfully logged in."});
                 }
                 else
                     res.status(400).send({message: "Incorrect password"});

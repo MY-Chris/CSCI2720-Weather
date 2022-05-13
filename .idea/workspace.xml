@@ -4,10 +4,8 @@
     <list default="true" id="b50e50cc-aacb-41f5-ba35-026f49e1d715" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weather/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/weather/src/Components/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/Components/Login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/weather/src/Components/MyNavbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/Components/MyNavbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weather/src/services/auth.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/services/auth.service.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +67,7 @@
       <workItem from="1652447914531" duration="1070000" />
       <workItem from="1652449061355" duration="354000" />
       <workItem from="1652450004221" duration="123000" />
-      <workItem from="1652450135806" duration="785000" />
+      <workItem from="1652450135806" duration="2341000" />
     </task>
     <servers />
   </component>

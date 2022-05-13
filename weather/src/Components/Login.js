@@ -61,8 +61,8 @@ export default class Login extends Component {
 
             }, 3000);
             sessionStorage.setItem("user", JSON.stringify(response.data.user));
-            sessionStorage.setItem("userid", JSON.stringify(response.data.userid));
-            console.log(JSON.stringify(response.data.userid));
+            sessionStorage.setItem("userid", response.data.userid);
+            console.log(response.data.userid);
             this.setState({
               message: response.data.message,
               successful: true

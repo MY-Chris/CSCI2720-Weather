@@ -50,6 +50,7 @@ export default class NavbarComp extends Component {
         if (user) {
             this.setState({
                 currentUser: user,
+                userid:AuthService.getUserId()
             });
 
             document.getElementById("App").classList.remove("Appu");
