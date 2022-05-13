@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import unfavourite from '../images/unfavourite.png'
 import favourite from '../images/favourite.png'
-
+import {
+    Link,
+  } from "react-router-dom";
 
 export default class Favourites extends Component {
     constructor(props) {
@@ -68,9 +70,10 @@ export default class Favourites extends Component {
                     <tr key={data}>
                     
                         <td>
-                            <a href = {`http://localhost:3000/info/${data}`}>
-                              {data}
-                            </a>
+                        <Link as={Link} to={`/info/${data}`}>{data}</Link>
+                            {/*<a href = {`http://localhost:3000/info/${data[accessor]}`}>*/}
+
+                            {/*</a>*/}
                         </td>
                         <td>
                         <button>{<img src={favourite} width={25} />}</button>

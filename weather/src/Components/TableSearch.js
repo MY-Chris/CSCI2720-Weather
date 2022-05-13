@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import {
+  Link,
+} from "react-router-dom";
 
 export default class TableSearch extends Component {
     constructor(props) {
@@ -240,9 +243,10 @@ export default class TableSearch extends Component {
                 if(accessor == "locName"){
                   const tData = data[accessor];
                   return (<td key={accessor}>
-                            <a href = {`http://localhost:3000/info/${data[accessor]}`}>
-                              {tData}
-                            </a>
+                            <Link as={Link} to={`/info/${data[accessor]}`}>{tData}</Link>
+                            {/*<a href = {`http://localhost:3000/info/${data[accessor]}`}>*/}
+
+                            {/*</a>*/}
                           </td>)
                 }
                 else{
