@@ -75,7 +75,7 @@ app.post('/auth/signin', (req, res) => {
         if (err)
             res.send({message: err});
         else {
-            if req.body['password'] == e.password) {
+            if (req.body['password'] == e.password) {
                 res.send({user:req.body['username'],message: "Successfully logged in."});
             }
             else
