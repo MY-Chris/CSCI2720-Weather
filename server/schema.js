@@ -24,7 +24,13 @@ const LocationSchema = mongoose.Schema({
     locName: {type: String, required: true, unique: true},
     latitude: {type: Number, required: true},
     longitude: {type: Number, required: true},
-    comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}]
+    comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}],
+    temp_c: {type: Number},
+    wind_kph: {type: Number},
+    wind_dir: {type: String},
+    humidity: {type: Number},
+    precip_mm: {type: Number},
+    vis_km: {type: Number}
 });
 
 const CommentSchema = mongoose.Schema({
