@@ -65,7 +65,7 @@ export default class NavbarComp extends Component {
             userid = userid.toString().substring(1, 25);
         (async () => {
             const data = await fetch(
-              "http://localhost:3001/users/theme/" + userid// GET theme path 
+              "http://localhost:80/users/theme/" + userid// GET theme path 
             )
             .then((res) => res.json())
             .then((data) => data);
@@ -130,7 +130,7 @@ export default class NavbarComp extends Component {
         let userid = sessionStorage.getItem('userid').toString().substring(1, 25);
         let data = "userId=" + userid + "&theme=" + newtheme;
         console.log(data);
-        fetch('http://localhost:3001/users/theme', {
+        fetch('http://localhost:80/users/theme', {
                 headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
                 },

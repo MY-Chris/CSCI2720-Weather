@@ -21,7 +21,7 @@ export default class TableSearch extends Component {
       let userid = sessionStorage.getItem('userid').toString().substring(1, 25);
       (async () => {
         const data = await fetch(
-          "http://localhost:3001/users/theme/" + userid// GET theme path 
+          "http://localhost:80/users/theme/" + userid// GET theme path 
         )
         .then((res) => res.json())
         .then((data) => data);
@@ -65,7 +65,7 @@ export default class TableSearch extends Component {
       else if(this.state.field == "city"){
         (async () => {
           const data = await fetch(
-            "http://localhost:3001/locations_search/locName/" + this.state.value
+            "http://localhost:80/locations_search/locName/" + this.state.value
           )
           .then((res) => res.json())
           .then((data) => data);
@@ -81,7 +81,7 @@ export default class TableSearch extends Component {
       else{
         (async () => {
           const data = await fetch(
-            "http://localhost:3001/locations_search/" + this.state.field + "/" + this.state.value + "/" + this.state.value2
+            "http://localhost:80/locations_search/" + this.state.field + "/" + this.state.value + "/" + this.state.value2
           )
           .then((res) => res.json())
           .then((data) => data);

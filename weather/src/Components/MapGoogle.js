@@ -14,7 +14,7 @@ export class MapGoogle extends Component {
     componentDidMount() {
       (async () => {
         const data = await fetch(
-          "http://localhost:3001/locations"
+          "http://localhost:80/locations"
         )
         .then((res) => res.json())
         .then((data) => data);

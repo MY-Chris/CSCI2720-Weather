@@ -14,7 +14,7 @@ export default class Favourites extends Component {
         let userid = sessionStorage.getItem('userid').toString().substring(1, 25);
         (async () => {
         const data = await fetch(
-            "http://localhost:3001/users/theme/" + userid// GET theme path 
+            "http://localhost:80/users/theme/" + userid// GET theme path 
         )
         .then((res) => res.json())
         .then((data) => data);
@@ -35,7 +35,7 @@ export default class Favourites extends Component {
 
         (async () => {
           const data = await fetch(
-            "http://localhost:3001/users/" + userid + "/favorites"
+            "http://localhost:80/users/" + userid + "/favorites"
           )
           .then(res => res.json())
         .then(data => data);

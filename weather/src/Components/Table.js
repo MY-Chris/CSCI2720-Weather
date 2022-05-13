@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Redirect } from "react";
 import "./table.css";
 import sun from '../images/sun.png';
 import moon from '../images/moon.png'
@@ -20,7 +20,7 @@ export default class Table extends Component {
     let userid = sessionStorage.getItem('userid').toString().substring(1, 25);
     (async () => {
       const data = await fetch(
-        "http://localhost:3001/users/theme/" + userid// GET theme path 
+        "http://localhost:80/users/theme/" + userid// GET theme path 
       )
       .then((res) => res.json())
       .then((data) => data);
@@ -43,7 +43,7 @@ export default class Table extends Component {
   
     (async () => {
       const data = await fetch(
-        "http://localhost:3001/locations"
+        "http://localhost:80/locations"
       )
       .then((res) => res.json())
       .then((data) => data);

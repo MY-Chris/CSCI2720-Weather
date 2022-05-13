@@ -164,7 +164,7 @@ export class DisplayWeather extends Component{
     let userid = sessionStorage.getItem('userid').toString().substring(1, 25);
     (async () => {
       const data = await fetch(
-        "http://localhost:3001/users/theme/" + userid// GET theme path 
+        "http://localhost:80/users/theme/" + userid// GET theme path 
       )
       .then((res) => res.json())
       .then((data) => data);
@@ -184,10 +184,10 @@ export class DisplayWeather extends Component{
   })();
 
       
-console.log("http://localhost:3001/locations/" + cityinurl + "/users/" + userid);
+console.log("http://localhost:80/locations/" + cityinurl + "/users/" + userid);
     (async () => {
       const data = await fetch(
-        "http://localhost:3001/locations/" + cityinurl + "/users/" + userid
+        "http://localhost:80/locations/" + cityinurl + "/users/" + userid
       )
       .then((res) => res.json())
       .then((data) => data);
@@ -209,7 +209,7 @@ console.log("http://localhost:3001/locations/" + cityinurl + "/users/" + userid)
     (async () => {
       //console.log(this.state.data.data);
       const data = await fetch(
-        "http://localhost:3001/history/past5days/" + cityinurl
+        "http://localhost:80/history/past5days/" + cityinurl
       )
       .then((res) => res.json())
       .then((data) => data);
@@ -250,7 +250,7 @@ console.log("http://localhost:3001/locations/" + cityinurl + "/users/" + userid)
     (async () => {
       //console.log(this.state.data.data);
       const data = await fetch(
-        "http://localhost:3001/history/past10hours/" + cityinurl
+        "http://localhost:80/history/past10hours/" + cityinurl
       )
       .then((res) => res.json())
       .then((data) => data);
@@ -311,7 +311,7 @@ console.log("http://localhost:3001/locations/" + cityinurl + "/users/" + userid)
     console.log(cityinurl);
     console.log(status);
     let userid = sessionStorage.getItem('userid').toString().substring(1, 25);
-    fetch('http://localhost:3001/locations/' + cityinurl + "/users/" + userid + "/fav/" + status)
+    fetch('http://localhost:80/locations/' + cityinurl + "/users/" + userid + "/fav/" + status)
         .then((res) => res.text())
         .then((data) => {
           data.replace(/\n/g, "");
@@ -337,7 +337,7 @@ console.log("http://localhost:3001/locations/" + cityinurl + "/users/" + userid)
         content: content}])})
 
     let data = "content="+ content;
-        fetch('http://localhost:3001/locations/' + cityinurl + "/users/" + userid, {
+        fetch('http://localhost:80/locations/' + cityinurl + "/users/" + userid, {
             headers: {
             "Content-Type": "application/x-www-form-urlencoded",
             },

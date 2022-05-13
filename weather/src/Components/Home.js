@@ -8,13 +8,13 @@ export default class Home extends Component {
         let theme = "light";
         console.log(userid);
         let userid = sessionStorage.getItem('userid');
-        console.log("http://localhost:3001/users/theme/" + userid)
+        console.log("http://localhost:80/users/theme/" + userid)
         
         if(userid != undefined){
             userid = userid.toString().substring(1, 25);
             (async () => {
             const data = await fetch(
-                "http://localhost:3001/users/theme/" + userid// GET theme path 
+                "http://localhost:80/users/theme/" + userid// GET theme path 
             )
             .then((res) => res.json())
             .then((data) => data);
