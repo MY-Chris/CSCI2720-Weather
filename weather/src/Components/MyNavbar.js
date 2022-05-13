@@ -201,11 +201,13 @@ export default class NavbarComp extends Component {
             <Router>
                 <div>
                     <Navbar bg="dark" variant={"dark"} expand="lg">
-                        <Navbar.Brand href="/">&nbsp;
+                        <Navbar.Brand href="#">
+                        &nbsp;
                         <button onClick={this.handleTheme}>{this.state.theme == "dark"? 
                                     <img src={moon} width={40} /> 
                                 : <img src={sun} width={40} />}</button>
-                        &nbsp;
+                        </Navbar.Brand>
+                        <Navbar.Brand href="/">
                         Weathering With Me</Navbar.Brand>
                         <Navbar.Toggle aria-controls="navbarScroll"/>
                         <Navbar.Collapse id="navbarScroll">
