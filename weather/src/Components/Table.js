@@ -2,6 +2,9 @@ import React, { Component, Redirect } from "react";
 import "./table.css";
 import sun from '../images/sun.png';
 import moon from '../images/moon.png'
+import {
+  Link,
+} from "react-router-dom";
 
 export default class Table extends Component {
   constructor(props) {
@@ -104,7 +107,9 @@ export default class Table extends Component {
   };
 
 
+
   render(){
+
   return (
     <div>
     <div className="table_container" id="table_container">
@@ -145,6 +150,7 @@ export default class Table extends Component {
         
         <tbody>
         {this.state.tableData.map((data) => {
+
           return (
             <tr key={data._id}>
               {this.state.columns.map(({ accessor }) => {
@@ -152,9 +158,10 @@ export default class Table extends Component {
                 if(accessor == "locName"){
                   const tData = data[accessor];
                   return (<td key={accessor}>
-                            <a href = {`http://localhost:3000/info/${data[accessor]}`}>
-                              {tData}
-                            </a>
+                    <Link as={Link} to={`/info/${data[accessor]}`}>{tData}</Link>
+                            {/*<a href = {`http://localhost:3000/info/${data[accessor]}`}>*/}
+
+                            {/*</a>*/}
                           </td>)
                 }
                 else{

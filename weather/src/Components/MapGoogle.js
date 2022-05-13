@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import {
+    Link,
+} from "react-router-dom";
+
+
 
 export class MapGoogle extends Component {
     constructor(props) {
@@ -24,12 +29,18 @@ export class MapGoogle extends Component {
     }
   
     displayMarkers = () => {
+
+
       return this.state.stores.map((store, index) => {
         return <Marker key={index} id={index} position={{
          lat: store.latitude,
          lng: store.longitude
        }}
-       onClick={() => window.location.pathname = `../info/${store.locName}`} />
+                       // onClick={routeChange(`../info/${store.locName}`)}
+       onClick={() => window.location.pathname = `../info/${store.locName}`}
+          ></Marker>
+            {/*<Link as={Link} to={`../info/${store.locName}`}></Link>*/}
+
       })
     }
   

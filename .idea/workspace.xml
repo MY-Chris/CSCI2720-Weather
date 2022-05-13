@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b50e50cc-aacb-41f5-ba35-026f49e1d715" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/server/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weather/src/Components/MapGoogle.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/Components/MapGoogle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weather/src/Components/Table.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/Components/Table.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +75,10 @@
       <workItem from="1652474477499" duration="668000" />
       <workItem from="1652476548609" duration="115000" />
       <workItem from="1652477542976" duration="7000" />
-      <workItem from="1652478247259" duration="217000" />
+      <workItem from="1652478247259" duration="854000" />
+      <workItem from="1652479182744" duration="711000" />
+      <workItem from="1652480481943" duration="861000" />
+      <workItem from="1652481395777" duration="2661000" />
     </task>
     <servers />
   </component>
