@@ -70,6 +70,8 @@ const AdminBroOptions = {
                             let url = 'http://api.weatherapi.com/v1/current.json?key=072f5ae9c4c849f8858104048220805&q=' + loc.locName;
                             const weather_info = await myfunctions1.weatherRequest(url);
                             const updatedLoc = await schemas.Location.findOneAndUpdate({locName: loc.locName}, {
+                                latitude: weather_info.location.lat,
+                                longitude: weather_info.location.lon,
                                 temp_c: weather_info.current.temp_c,
                                 wind_kph: weather_info.current.wind_kph,
                                 wind_dir: weather_info.current.wind_dir,
