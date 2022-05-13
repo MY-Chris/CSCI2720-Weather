@@ -327,13 +327,17 @@ console.log("http://localhost:3001/locations/" + cityinurl + "/users/" + userid)
     let cityinurl = cityurl.substring(cityurl.lastIndexOf('/') + 1);
     //let data = "location=" + cityinurl;
     console.log(cityinurl);
+
+    let userid = sessionStorage.getItem('userid').toString().substring(1, 25);
+    let username = sessionStorage.getItem('user').toString();
+    username = username.substring(1, username.length - 1);
+    console.log("1" + username)
     this.setState({comments: this.state.comments.concat(
-      [{_id: "627be65d731afd1b3293a027",
-        username: "userh",
+      [{_id: userid,
+        username: username,
         content: content}])})
 
     let data = "content="+ content;
-    let userid = sessionStorage.getItem('userid').toString().substring(1, 25);
         fetch('http://localhost:3001/locations/' + cityinurl + "/users/" + userid, {
             headers: {
             "Content-Type": "application/x-www-form-urlencoded",
