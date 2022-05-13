@@ -93,6 +93,10 @@ app.put('/users/theme', (req, res) => {
     myfunctions1.updateTheme(req.body['userId'], req.body['theme'], res);
 });
 
+app.get('/users/theme/:userId', (req, res) => {
+    myfunctions1.getTheme(req.params.userId, res);
+});
+
 //GraphQL
 const typeDefs = gql`
     type Location {

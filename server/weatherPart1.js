@@ -131,8 +131,22 @@ const updateTheme = function( userId, theme, res){
     
 }
 
+const getTheme = function( userId, res){
+    schemas.User.findOne(
+        {_id: userId},
+        function (err, response) {
+            if (err)
+                console.log(err);
+            else
+                console.log(response);
+                res.send(response.preference);
+        }
+    );
+    
+}
+
 // export function
-module.exports = {weatherRequest, locationsWIthWeather, locations, searchLocations, weatherHistoryP5d, weatherHistoryP10h, updateTheme};
+module.exports = {weatherRequest, locationsWIthWeather, locations, searchLocations, weatherHistoryP5d, weatherHistoryP10h, updateTheme, getTheme};
 
 
 
