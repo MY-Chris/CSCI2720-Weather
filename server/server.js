@@ -55,7 +55,17 @@ app.post('/auth/signup', (req, res) => {
     //     }
     //     return hash;
     // };
-
+    schemas.User.findOne({ username: req.body['username'] }, (err, e) => {
+            if (err)
+                res.send(err);
+            else {
+                if(e==null)
+                {
+                    res.send({message: "Account already exists!"});
+                    return;
+                }
+            }
+        });
     schemas.User.create({
         username: req.body['username'],
         password: req.body['password'],
