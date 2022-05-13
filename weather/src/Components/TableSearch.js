@@ -1,8 +1,4 @@
 import React, { Component } from "react";
-import mockdata from "../data.json";
-import SearchField from "react-search-field";
-import SelectSearch from 'react-select-search';
-import SearchResult from "./SearchResult";
 
 export default class TableSearch extends Component {
     constructor(props) {

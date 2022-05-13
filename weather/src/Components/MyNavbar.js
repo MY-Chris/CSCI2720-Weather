@@ -18,7 +18,6 @@ import Logout from './Logout'
 import Table from './Table';
 import MapGoogle from './MapGoogle';
 import TableSearch from './TableSearch';
-import SearchResult from './SearchResult';
 import DisplayWeather from './DisplayWeather';
 import Favourites from './Favourites';
 import Home from "./Home";
@@ -56,7 +55,7 @@ export default class NavbarComp extends Component {
             document.getElementById("App").classList.add("App");
         }
 
-        let usertheme;
+        let usertheme = "dark";
         (async () => {
             const data = await fetch(
               "http://localhost:3001/users/theme/" + "627be65d731afd1b3293a027"// GET theme path 
@@ -142,7 +141,7 @@ export default class NavbarComp extends Component {
 
       }
 
-/*
+
       checkTheme(e){
         console.log(this.state.theme);
         let curtheme = this.state.theme;
@@ -165,7 +164,7 @@ export default class NavbarComp extends Component {
         console.log(document.getElementById("App"));
         
       }
-*/
+
 
     render() {
         const {currentUser} = this.state;
@@ -234,7 +233,7 @@ export default class NavbarComp extends Component {
                                 {/*<Nav.Link as={Link} to="/login">Log in</Nav.Link>*/}
                                 {/*<Nav.Link as={Link} to="/signup">Sign up</Nav.Link>*/}
 
-                                <Nav.Link as={Link} to="/table">Table</Nav.Link>
+                                <Nav.Link as={Link} to="/table" onClick={this.checkTheme}>Table</Nav.Link>
                                 <Nav.Link as={Link} to="/locations_search">Search</Nav.Link>
                                 <Nav.Link as={Link} to="/mapgoogle">Map</Nav.Link>
                                 <Nav.Link as={Link} to="/favourites">Favourites</Nav.Link>
@@ -261,10 +260,6 @@ export default class NavbarComp extends Component {
                         <Route exact path="/table" element={<Table/>}/>
 
                         <Route exact path="/locations_search" element={<TableSearch/>}/>
-
-                        <Route exact path="/locations_search/locName/:key" element={<SearchResult/>}/>
-
-                        <Route exact path="/locations_search/:field/:key1/:key2" element={<SearchResult/>}/>
 
                         <Route exact path="/mapgoogle" element={<MapGoogle/>}/>
 

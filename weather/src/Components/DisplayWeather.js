@@ -142,6 +142,7 @@ export class DisplayWeather extends Component{
   loc: {}};
   this.setChecked = this.setChecked.bind(this);
   this.handleFavourite = this.handleFavourite.bind(this);
+  this.processform = this.processform.bind(this);
   }
 
   /*
@@ -322,6 +323,10 @@ export class DisplayWeather extends Component{
     let cityinurl = cityurl.substring(cityurl.lastIndexOf('/') + 1);
     //let data = "location=" + cityinurl;
     console.log(cityinurl);
+    this.setState({comments: this.state.comments.concat(
+      [{_id: "627be65d731afd1b3293a027",
+        username: "userh",
+        content: content}])})
 
     let data = "content="+ content;
         fetch('http://localhost:3001/locations/' + cityinurl + "/users/" + "627be65d731afd1b3293a027", {
@@ -344,7 +349,7 @@ export class DisplayWeather extends Component{
           console.error('Error:', error);
         });
 
-        window.location.reload(false);
+        //window.location.reload(false);
   }
   
 
@@ -500,11 +505,11 @@ export class DisplayWeather extends Component{
     </div>
     </Col>
     <Col>
-    <div className="comments" id="comments">
-    <div className="grad1 maincardbg">
+    <div className="comments">
+    <section className="grad1 maincardbg">
             <h3 id="heading4" className="text-center" style={{marginTop: 5}}>Comments</h3>
             <i>Please scroll down to see all the comments.&emsp;&emsp;&emsp;</i>
-            <div className="ScrollStyle"> 
+            <div id="comments" className="ScrollStyle"> 
             {this.state.comments.map((data) => {
               //console.log(data);
               return (
@@ -526,7 +531,7 @@ export class DisplayWeather extends Component{
             </div>
             <button id="addcomment" type="button" className="btn btn-primary" onClick={this.processform} style={{marginBottom: 10}}>Add comment</button>
             </form>
-          </div>
+          </section>
             </div>
     </Col>
     </Row>

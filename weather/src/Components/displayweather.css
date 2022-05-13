@@ -17,13 +17,6 @@ button {
   margin-left: 25%;
 }
 
-.displayweather {
-  margin-top: 20px;
-  display: flex;
-  flex-flow: column nowrap;
-  /*background-image: radial-gradient(rgb(221, 233, 241) 5%, white);*/
-  border-radius: 20px;
-}
 
 .displayweather .maincard {
   width: 540px;
