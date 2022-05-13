@@ -5,8 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/weather/src/Components/MyNavbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/Components/MyNavbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weather/src/common/auth-verify.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/weather/src/services/auth-header.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +63,8 @@
       <workItem from="1652428900057" duration="4333000" />
       <workItem from="1652433453272" duration="4067000" />
       <workItem from="1652445557644" duration="630000" />
-      <workItem from="1652447914531" duration="1054000" />
+      <workItem from="1652447914531" duration="1070000" />
+      <workItem from="1652449061355" duration="354000" />
     </task>
     <servers />
   </component>

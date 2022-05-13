@@ -52,8 +52,6 @@ export default class NavbarComp extends Component {
                 currentUser: user,
             });
 
-            document.getElementById("App").classList.remove("Appu");
-            document.getElementById("App").classList.add("App");
         }
 
         let usertheme = "dark";

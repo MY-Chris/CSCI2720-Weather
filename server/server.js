@@ -75,6 +75,7 @@ app.post('/auth/signup', (req, res) => {
                     schemas.User.create({
                         username: req.body['username'],
                         password: req.body['password'],
+                        preference: "light"
                     }, (err, e) => {
                         if (err)
                             res.status(400).send({message: err});
