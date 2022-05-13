@@ -22,7 +22,7 @@ import TableSearch from './TableSearch';
 import DisplayWeather from './DisplayWeather';
 import Favourites from './Favourites';
 import Home from "./Home";
-import EventBus from "../common/EventBus";
+// import EventBus from "../common/EventBus";
 import AuthService from "../services/auth.service";
 
 
@@ -76,14 +76,14 @@ export default class NavbarComp extends Component {
         })();
 
 
-        EventBus.on("logout", () => {
-            this.logOut();
-        });
+        // EventBus.on("logout", () => {
+        //     this.logOut();
+        // });
     }
     }
 
     componentWillUnmount() {
-        EventBus.remove("logout");
+        // EventBus.remove("logout");
     }
 
     NoMatch() {
