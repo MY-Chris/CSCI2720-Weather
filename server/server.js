@@ -1,3 +1,7 @@
+const AdminBro = require('admin-bro');
+const AdminBroExpress = require('admin-bro-expressjs');
+const AdminBroMongoose = require('admin-bro-mongoose');
+
 const express = require('express');
 const app = express();
 const session = require('express-session');
@@ -31,6 +35,7 @@ db.on('error', console.error.bind(console, 'Connection error:'));
 db.once('open', function () {
     console.log("Connection is open...");
 });
+
 console.log(moment().tz('Asia/Beijing').format());
 morgan.token('date', (req, res, tz) => {
     return moment().tz(tz).format();
@@ -38,6 +43,15 @@ morgan.token('date', (req, res, tz) => {
 morgan.format('myformat', ':remote-addr - [:date[Asia/Beijing]] ":method :url HTTP/:http-version" ":user-agent"');
 const accessLogStream = fs.createWriteStream(__dirname + '/access.log', {flags: 'a'});
 app.use(morgan('myformat', {"stream": accessLogStream}));
+
+AdminBro.registerAdapter(AdminBroMongoose);
+const AdminBroOptions = {
+    resources: [schemas.User, schemas.Location, schemas.Comment],
+    rootPath: '/admin',
+};
+const adminBro = new AdminBro(AdminBroOptions)
+const router = AdminBroExpress.buildRouter(adminBro);
+app.use(adminBro.options.rootPath, router);
 
 
 //Add Routes here
