@@ -3,8 +3,33 @@
   <component name="ChangeListManager">
     <list default="true" id="b50e50cc-aacb-41f5-ba35-026f49e1d715" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/schema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/schema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/weatherPart1.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/weatherPart1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/weatherPart2.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/weatherPart2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weather/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weather/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weather/src/App.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/App.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weather/src/Components/Admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/Components/Admin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weather/src/Components/Contact.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/Components/Contact.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weather/src/Components/DisplayWeather.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/Components/DisplayWeather.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weather/src/Components/Favourites.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/Components/Favourites.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weather/src/Components/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/Components/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weather/src/Components/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/Components/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weather/src/Components/Logout.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/Components/Logout.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/weather/src/Components/MapGoogle.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/Components/MapGoogle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weather/src/Components/MyNavbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/Components/MyNavbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weather/src/Components/PrivateRoute.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/weather/src/Components/Signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/Components/Signup.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/weather/src/Components/Table.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/Components/Table.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weather/src/Components/TableSearch.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/Components/TableSearch.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weather/src/Components/displayweather.css" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/Components/displayweather.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weather/src/Components/table.css" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/Components/table.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weather/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weather/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weather/src/reportWebVitals.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/reportWebVitals.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weather/src/services/auth.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/services/auth.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weather/src/setupTests.js" beforeDir="false" afterPath="$PROJECT_DIR$/weather/src/setupTests.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,6 +104,9 @@
       <workItem from="1652479182744" duration="711000" />
       <workItem from="1652480481943" duration="861000" />
       <workItem from="1652481395777" duration="2661000" />
+      <workItem from="1652484469008" duration="888000" />
+      <workItem from="1652485386798" duration="596000" />
+      <workItem from="1652524577208" duration="1143000" />
     </task>
     <servers />
   </component>

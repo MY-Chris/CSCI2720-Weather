@@ -1,18 +1,23 @@
+// HUANG Kaining 1155141441
+// HUANG Sida 1155124414
+// MA Yuan 1155124344
+// ZHANG Wenxuan 1155141413
+// ZHAO Jinpei 1155124239
 import axios from "axios";
 import bcrypt from 'bcryptjs'
 const salt = '$2a$10$CwTycUXWue0Thq9StjUM0u' //bcrypt.genSaltSync(10)
 const API_URL = "http://localhost:80/auth/";
 
-function hash(s) {
-  var hash = 0, i, chr;
-  if (s.length === 0) return hash;
-  for (i = 0; i < s.length; i++) {
-    chr = s.charCodeAt(i);
-    hash = ((hash << 5) - hash) + chr;
-    hash |= 0;
-  }
-  return hash;
-};
+// function hash(s) {
+//   var hash = 0, i, chr;
+//   if (s.length === 0) return hash;
+//   for (i = 0; i < s.length; i++) {
+//     chr = s.charCodeAt(i);
+//     hash = ((hash << 5) - hash) + chr;
+//     hash |= 0;
+//   }
+//   return hash;
+// };
 class AuthService {
 
 
