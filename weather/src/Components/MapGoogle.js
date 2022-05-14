@@ -107,7 +107,8 @@ export class MapGoogle extends Component {
     </tbody>
     </table>
     </div>
-    <Col>
+    </Row>
+    <Row>
           <Map
             google={this.props.google}
             zoom={2}
@@ -119,8 +120,8 @@ export class MapGoogle extends Component {
           >
             {this.displayMarkers()}
           </Map>
-          </Col>
           </Row>
+          
         </Container>
       );
     }
