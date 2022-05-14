@@ -379,7 +379,8 @@ console.log("http://localhost:80/locations/" + cityinurl + "/users/" + userid);
         <React.Fragment>
           <div className="maincard maincardbg">
             <span className="cardtitle">
-              Weather in {this.state.data.location.name} , {this.state.data.location.country}
+              Weather in {this.state.data.location.name},&nbsp;
+              {this.state.data.location.country == "United States of America" ? "USA" : this.state.data.location.country}
               &emsp;&emsp;&emsp;
               {/*
                 <ToggleButton
