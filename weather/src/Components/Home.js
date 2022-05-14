@@ -33,11 +33,13 @@ export default class Home extends Component {
     
 
    render(){
+        
        return (
            <div>
                <b id="header" className="header" style={{color: "#a0ccee"}}>Weathering With Me</b>
-                <div id = "graphql" >
-                    <h3> Weathering With Me provides a <b>Graphql API</b> at endpoint <b>/graphql</b> </h3>
+                <div style={{display: "flex"}}>
+                <div id = "graphql" style={{color: "#a0ccee", textAlign: "left", margin: "auto"}}>
+                    <h4> Weathering With Me provides a <b>Graphql API</b> at endpoint <b>/graphql</b> </h4>
                     <p>These queries are availiable:<br></br></p>
                     <p><b>locations</b></p>
                     <p>List all location details (including DB data, API data, and user comments)</p>
@@ -47,6 +49,7 @@ export default class Home extends Component {
                     <p>locName <br></br>  comments (commentUser commentLoc content) <br></br>latitude longitude<br></br> temp_c wind_kph wind_dir humidity precip_mm vis_km</p>
                     
                     
+                </div>
                 </div>
                 
            </div>
